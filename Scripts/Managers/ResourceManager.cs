@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Com.IsartDigital.ProjectName.Game
 {
 	
-    public class ResourceManager : Node
+    public class ResourceManager : Node2D
     {
         static private ResourceManager instance;
 
@@ -77,7 +77,7 @@ namespace Com.IsartDigital.ProjectName.Game
             food = initailFood;
         }
 
-        public bool chekRverificationOfConstructionResources(Cell.CellType cellType)
+        public bool canBuilThisBulding(Cell.CellType cellType)
         {
             if (cellType == Cell.CellType.Empty)
             {
@@ -100,7 +100,7 @@ namespace Com.IsartDigital.ProjectName.Game
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
 
-                return false;
+            return false;
         }
 
         public void PayConstructionResources(Cell.CellType cellType)
