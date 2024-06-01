@@ -10,14 +10,13 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
-Cell_size = 37.568
+Cell_size = 100.0
 view_size = Vector2( 10.957, 0 )
 
 [node name="GridManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
-cellFactory = {
-"Void": ExtResource( 4 )
-}
+Cell_size = 100.0
+cellFactory = ExtResource( 4 )
 
 [node name="ResourcesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 // Author : Sophia Solignac
 namespace Com.IsartDigital.ProjectName.Game
@@ -58,13 +59,20 @@ namespace Com.IsartDigital.ProjectName.Game
     }
     public class Cell : Node2D
     {
-        public enum CellType { Empty, Void, House, IronSpot, FoodSpot}
+        public enum CellType { Void, Empty, House, IronSpot, FoodSpot}
         public CellType cellType = CellType.Empty;
         public Coordinates gridCoordinates;
 
+        public Sprite CellSprite;
+
+        [Export] private NodePath CellSpritePath;
+
+        [Export] private List<Texture> CellTexturList = new List<Texture>();
+
         public override void _Ready()
         {
-            
+            CellSprite = GetNode<Sprite>(CellSpritePath);
+            CellSprite.Texture = CellTexturList[(int)cellType];
         }
 
     }

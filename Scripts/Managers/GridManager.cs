@@ -15,10 +15,12 @@ namespace Com.IsartDigital.CCM.Managers
         private Vector2 gridSize = Vector2.Zero;
         public Vector2 GridSize { get => gridSize;}
 
-        private const float START_CELL_SIZE = 64;
+        private const float START_CELL_SIZE = 100;
         private float cell_size;
-        private float half_cell_size; 
-        
+        private float half_cell_size;
+
+        public List<Cell> numberOfHouses = new List<Cell>();
+
         [Export(PropertyHint.Range, "2,100")]
         public float Cell_size
         {
@@ -60,11 +62,20 @@ namespace Com.IsartDigital.CCM.Managers
             GD.Randomize();
             GetViewport().Connect(Signals.Ui.SCREEN_RESIZED, this, nameof(OnScreenSizeChanged));
             Cell_size = START_CELL_SIZE;
-            CreateGrid(5,5);
+            CreateGrid(50,50);
+
+            initialisateTheLevelOne();
         }
         public override void _Process(float delta)
         {
-            GD.Print(VectorToGrid(GetGlobalMousePosition()));
+            //GD.Print(VectorToGrid(GetGlobalMousePosition()));
+
+            if(Input.IsActionJustPressed("ui_accept"))
+            {
+                Cell lCel = grid[VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y];
+                lCel.Rotation = 1;
+
+            }
         }
 
         private void OnScreenSizeChanged()
@@ -72,7 +83,7 @@ namespace Com.IsartDigital.CCM.Managers
         }
 
         #region CellHandle
-        [Export] Dictionary<string, PackedScene> cellFactory = new Dictionary<string, PackedScene>();
+        [Export] PackedScene cellFactory;
 
         #endregion
 
@@ -94,7 +105,7 @@ namespace Com.IsartDigital.CCM.Managers
 
         public Cell CreateCell(CellType pCellType, Coordinates pCoordinates)
         {
-            Cell cell = cellFactory[pCellType.ToString()].Instance<Cell>();
+            Cell cell = cellFactory.Instance<Cell>();
             cell.gridCoordinates = pCoordinates; 
             cell.cellType = pCellType;
             cell.Position = GridToVector(pCoordinates);
@@ -109,6 +120,72 @@ namespace Com.IsartDigital.CCM.Managers
         Coordinates VectorToGrid(Vector2 pCoords)
         {
             return new Coordinates(Mathf.FloorToInt((pCoords.x ) / cell_size), -Mathf.FloorToInt((pCoords.y + cell_size) / cell_size));
+        }
+
+        private void initialisateTheLevelOne()
+       {
+           List<string> lMap = new List<string>
+           {
+               "     XXWXXX     ",
+               "   XXWXXXXXWX   ",
+               " #XXXXX#XXXXWXX ",
+               "WXXX#XXXXXWXX#XX",
+               "XXXWXXWXHHXXX#XX",
+               "XX##XXX#HHWWXXXX",
+               "XXXXXWXXXXX#XXXW",
+               "XX#XXXXWXXXXWXXX",
+               " XXXXWXXX#XXXXX ",
+               "   XWXXXXWXXX   ",
+               "     XXWXXX     "
+           };
+           
+           CellType lCellType = CellType.Void;
+            
+
+           for (int y = lMap.Count-1; y >= 0; y--)
+           {
+               string line = lMap[y];
+               for (int x = 0; x < line.Length; x++)
+               {
+                   char character = line[x];
+
+                   switch (character)
+                   {
+                        case ' ':
+                            lCellType = CellType.Void;
+                            break;
+                        case 'X':
+                            lCellType = CellType.Empty;
+                            break;
+                        case '#':
+                           lCellType = CellType.IronSpot;
+                           break;
+                       case 'W':
+                           lCellType = CellType.FoodSpot;
+                           break;
+                        case 'H':
+                            lCellType = CellType.House;
+                            break;
+                        default:
+                           break;
+                   }
+
+                    grid[x,y] = CreateCell(lCellType, new Coordinates(x,y));
+
+                    if (lCellType == CellType.House)
+                    {
+                        numberOfHouses.Add(grid[x, y]);
+                        GD.Print(numberOfHouses.Count);
+                        grid[x, y].CellSprite.Offset = new Vector2(0, -15);
+                    }
+                    else if (lCellType == CellType.IronSpot) grid[x, y].CellSprite.Offset = new Vector2(0, -1);
+                }
+           }
+       }
+
+        private void checkNumberOfHouseInTheWorld()
+        {
+
         }
     }
     

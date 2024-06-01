@@ -13,7 +13,7 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] public int initailIron = 15;
         [Export] public int initailFood = 15;
 
-        [Export] public int initailSettler = 5;        
+        //[Export] public int initailSettler = 5;        
         
 
         public int iron { get; set; }
@@ -84,17 +84,17 @@ namespace Com.IsartDigital.ProjectName.Game
                 EmptySpot EmptyTile = new EmptySpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.IronCost) return true;
             }
-            else if (cellType == Cell.CellType.House)
+            else if (cellType == Cell.CellType.Empty)
             {
                 House EmptyTile = new House();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
-            else if (cellType == Cell.CellType.IronSpot)
+            else if (cellType == Cell.CellType.Empty)
             {
                 IronSpot EmptyTile = new IronSpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
-            else if (cellType == Cell.CellType.FoodSpot)
+            else if (cellType == Cell.CellType.Empty)
             {
                 FoodSpot EmptyTile = new FoodSpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
@@ -115,30 +115,30 @@ namespace Com.IsartDigital.ProjectName.Game
                     food -= EmptyTile.FoodCost;
                 }
             }
-            else if (cellType == Cell.CellType.IronSpot)
+            else if (cellType == Cell.CellType.Empty)
             {
                 IronSpot EmptyTile = new IronSpot();
-
+            
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
                 }
             }
-            else if (cellType == Cell.CellType.IronSpot)
+            else if (cellType == Cell.CellType.Empty)
             {
                 IronSpot EmptyTile = new IronSpot();
-
+            
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
                 }
             }
-            else if (cellType == Cell.CellType.FoodSpot)
+            else if (cellType == Cell.CellType.Empty)
             {
                 FoodSpot EmptyTile = new FoodSpot();
-
+            
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
                 {
                     iron -= EmptyTile.IronCost;

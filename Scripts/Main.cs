@@ -5,7 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Threading;
 
 // Author : Sophia Solignac
-namespace Com.IsartDigital.ProjectName {
+namespace Com.IsartDigital.ProjectName.Game {
 
 	public class Main : Node2D
     {
