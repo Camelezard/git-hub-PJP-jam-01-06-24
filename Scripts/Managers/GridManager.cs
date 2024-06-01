@@ -70,11 +70,10 @@ namespace Com.IsartDigital.CCM.Managers
         {
             //GD.Print(VectorToGrid(GetGlobalMousePosition()));
 
-            if(Input.IsActionJustPressed("ui_accept"))
+            if(Input.IsActionJustPressed("left_clic"))
             {
-                Cell lCel = grid[VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y];
-                lCel.Rotation = 1;
-
+                checkTheTileSelected();
+                //checkNumberOfHouseInTheWorld();
             }
         }
 
@@ -175,17 +174,43 @@ namespace Com.IsartDigital.CCM.Managers
                     if (lCellType == CellType.House)
                     {
                         numberOfHouses.Add(grid[x, y]);
-                        GD.Print(numberOfHouses.Count);
                         grid[x, y].CellSprite.Offset = new Vector2(0, -15);
                     }
                     else if (lCellType == CellType.IronSpot) grid[x, y].CellSprite.Offset = new Vector2(0, -1);
                 }
            }
-       }
+        }
 
         private void checkNumberOfHouseInTheWorld()
         {
+            int lNumberOfsettlersMax = numberOfHouses.Count * 5;
+            int lNumberOfSettlers = ResourceManager.GetInstance().settlers;
+            if(lNumberOfSettlers > lNumberOfsettlersMax) { ResourceManager.GetInstance().settlers = lNumberOfsettlersMax; }
 
+            GD.Print(ResourceManager.GetInstance().settlers);
+        }
+
+        private void checkTheTileSelected()
+        {
+            Cell lCel = grid[VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y];
+
+            switch (lCel.cellType)
+            {
+                case CellType.Void:
+                    break;
+                case CellType.Empty:
+                    break;
+                case CellType.House:
+                    break;
+                case CellType.IronSpot:
+                    ResourceManager.GetInstance().ColectIron();
+                    break;
+                case CellType.FoodSpot:
+                    ResourceManager.GetInstance().ColectFood();
+                    break;
+                default:
+                    break;
+            }
         }
     }
     

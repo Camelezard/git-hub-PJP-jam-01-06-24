@@ -13,13 +13,21 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] public int initailIron = 15;
         [Export] public int initailFood = 15;
 
-        //[Export] public int initailSettler = 5;        
+        [Export] public int initailSettlers = 35;
+
+        [Export] public int ironGain = 3;
+        [Export] public int FoodGain = 5;
+
+        [Export] public int initialBlackholeCooldown = 5;        
         
 
         public int iron { get; set; }
         public int food { get; set; }
 
         public int settlers { get; set; }
+        public int acction { get; set; }
+
+        public int BlackHoleCooldown { get; set; }
 
         public abstract class Building
         {
@@ -75,6 +83,11 @@ namespace Com.IsartDigital.ProjectName.Game
 
             iron = initailIron;
             food = initailFood;
+
+            settlers = initailSettlers;
+            BlackHoleCooldown = initialBlackholeCooldown;
+
+            StartTheTurn();
         }
 
         public bool canBuilThisBulding(Cell.CellType cellType)
@@ -84,17 +97,17 @@ namespace Com.IsartDigital.ProjectName.Game
                 EmptySpot EmptyTile = new EmptySpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.IronCost) return true;
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.House)
             {
                 House EmptyTile = new House();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.IronSpot)
             {
                 IronSpot EmptyTile = new IronSpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.FoodSpot)
             {
                 FoodSpot EmptyTile = new FoodSpot();
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
@@ -147,6 +160,47 @@ namespace Com.IsartDigital.ProjectName.Game
             }
             GD.Print("IronLeft = " + iron);
             GD.Print("FoodLeft = " + food);
+        }
+
+        public void ColectIron()
+        {
+            iron += ironGain;
+            UseAcction();
+
+            Ui_Manager.GetInstance().acctualizeTheHud();
+        }
+
+        public void ColectFood()
+        {
+            food += FoodGain;
+            UseAcction();
+
+            Ui_Manager.GetInstance().acctualizeTheHud();
+        }
+
+        public void CraftAtile()
+        {
+            UseAcction();
+        }
+
+        public void UseAcction(int acctionNumber = 1)
+        {
+            acction -= acctionNumber;
+            if (acction <= 0) EndTheTurn();
+        }
+        
+        public void EndTheTurn()
+        {
+            BlackHoleCooldown--;
+
+            if (BlackHoleCooldown <= 0) { }//*blackHole*//
+            else StartTheTurn();
+        }
+
+        public void StartTheTurn()
+        {
+            acction = settlers;
+            food -= settlers;
         }
 
         protected override void Dispose(bool pDisposing)

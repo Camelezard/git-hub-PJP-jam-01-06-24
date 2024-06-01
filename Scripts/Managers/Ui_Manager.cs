@@ -12,11 +12,27 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] NodePath SetingButtonPath;
         [Export] NodePath QuitButtonPath;
 
+        [Export] NodePath IronCountLabelPath;
+        [Export] NodePath FoodCountLabelPath;
+
+        [Export] NodePath seltterCountLabelPath;
+        [Export] NodePath BlackHoleTurnLabelPath;
+
+        [Export] NodePath AcctionLabelPath;
+
         Button PlayButton;
         Button SetingButton;
         Button QuitButton;
 
-		static public Ui_Manager GetInstance () {
+        Label IronCountLabel;
+        Label FoodCountLabel;
+
+        Label seltterCountLabel;
+        Label BlackHoleTurnLabel;
+
+        Label AcctionLabel;
+
+        static public Ui_Manager GetInstance () {
 			if (instance == null) instance = new Ui_Manager();
 		    return instance;
 		}
@@ -36,9 +52,18 @@ namespace Com.IsartDigital.ProjectName.Game
             SetingButton = GetNode<Button>(SetingButtonPath);
             QuitButton = GetNode<Button>(QuitButtonPath);
 
+            IronCountLabel = GetNode<Label>(IronCountLabelPath);
+            FoodCountLabel = GetNode<Label>(FoodCountLabelPath);
+
+            seltterCountLabel = GetNode<Label>(seltterCountLabelPath);
+            BlackHoleTurnLabel = GetNode<Label>(BlackHoleTurnLabelPath);
+            AcctionLabel = GetNode<Label>(AcctionLabelPath);
+
             PlayButton.Connect("pressed", this, nameof(onPlayPressed));
             SetingButton.Connect("pressed", this, nameof(onSettingPressed));
             QuitButton.Connect("pressed", this, nameof(onQuitPressed));
+
+            acctualizeTheHud();
         }
 
         private void onPlayPressed()
@@ -56,9 +81,15 @@ namespace Com.IsartDigital.ProjectName.Game
             GetTree().Quit();
         }
 
-        private void acctualizeTheHud()
+        public void acctualizeTheHud()
         {
+            IronCountLabel.Text = ResourceManager.GetInstance().iron.ToString();
+            FoodCountLabel.Text = ResourceManager.GetInstance().food.ToString();
 
+            seltterCountLabel.Text = ResourceManager.GetInstance().settlers.ToString();
+
+            BlackHoleTurnLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
+            AcctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
         }
 
         protected override void Dispose(bool pDisposing)

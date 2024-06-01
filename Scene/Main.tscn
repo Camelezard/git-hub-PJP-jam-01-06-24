@@ -20,6 +20,7 @@ cellFactory = ExtResource( 4 )
 
 [node name="ResourcesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
+initailSettlers = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, -300 )
@@ -31,6 +32,11 @@ script = ExtResource( 6 )
 PlayButtonPath = NodePath("Play")
 SetingButtonPath = NodePath("Setting")
 QuitButtonPath = NodePath("Quit")
+IronCountLabelPath = NodePath("IronContainer/Iron")
+FoodCountLabelPath = NodePath("FoodContainer/Food")
+seltterCountLabelPath = NodePath("settlers/settlers")
+BlackHoleTurnLabelPath = NodePath("Black Hole turne/Iron")
+AcctionLabelPath = NodePath("Acction left/acction")
 
 [node name="Play" type="Button" parent="CanvasLayer"]
 margin_left = 458.0
@@ -127,7 +133,7 @@ margin_right = 532.0
 margin_bottom = 57.0
 rect_pivot_offset = Vector2( 22, 18 )
 
-[node name="Food" type="Label" parent="CanvasLayer/Acction left"]
+[node name="acction" type="Label" parent="CanvasLayer/Acction left"]
 margin_top = 13.0
 margin_right = 8.0
 margin_bottom = 27.0
@@ -147,7 +153,7 @@ margin_right = 151.0
 margin_bottom = 53.0
 rect_pivot_offset = Vector2( 22, 18 )
 
-[node name="Food" type="Label" parent="CanvasLayer/settlers"]
+[node name="settlers" type="Label" parent="CanvasLayer/settlers"]
 margin_top = 13.0
 margin_right = 8.0
 margin_bottom = 27.0
