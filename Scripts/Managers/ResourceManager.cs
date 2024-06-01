@@ -10,14 +10,14 @@ namespace Com.IsartDigital.ProjectName.Game
     {
         static private ResourceManager instance;
 
-        [Export] public int initailIron = 5;
-        [Export] public int initailFood = 5;
+        [Export] public int initailIron = 15;
+        [Export] public int initailFood = 15;
 
         [Export] public int initailSettler = 5;        
         
 
-        public int irons { get; set; }
-        public int foods { get; set; }
+        public int iron { get; set; }
+        public int food { get; set; }
 
         public int settlers { get; set; }
 
@@ -25,6 +25,12 @@ namespace Com.IsartDigital.ProjectName.Game
         {
             public abstract int IronCost { get; }
             public abstract int FoodCost { get; }
+        }
+
+        public class EmptySpot : Building
+        {
+            public override int IronCost => 1;
+            public override int FoodCost => 1;
         }
 
         public class House : Building
@@ -37,6 +43,18 @@ namespace Com.IsartDigital.ProjectName.Game
         {
             public override int IronCost => 5;
             public override int FoodCost => 1;
+        }
+
+        public class FoodSpot : Building
+        {
+            public override int IronCost => 2;
+            public override int FoodCost => 0;
+        }
+
+        public class IronSpot : Building
+        {
+            public override int IronCost => 0;
+            public override int FoodCost => 2;
         }
 
         static public ResourceManager GetInstance () {
@@ -55,18 +73,80 @@ namespace Com.IsartDigital.ProjectName.Game
             }
             instance = this;
 
-
+            iron = initailIron;
+            food = initailFood;
         }
 
-        public bool chekRverificationOfRonstructionResources(Cell.CellType cellType)
+        public bool chekRverificationOfConstructionResources(Cell.CellType cellType)
         {
             if (cellType == Cell.CellType.Empty)
             {
+                EmptySpot EmptyTile = new EmptySpot();
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.IronCost) return true;
+            }
+            else if (cellType == Cell.CellType.House)
+            {
                 House EmptyTile = new House();
-                if (EmptyTile.IronCost >= irons && EmptyTile.FoodCost >= foods) return true;
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
+            }
+            else if (cellType == Cell.CellType.IronSpot)
+            {
+                IronSpot EmptyTile = new IronSpot();
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
+            }
+            else if (cellType == Cell.CellType.FoodSpot)
+            {
+                FoodSpot EmptyTile = new FoodSpot();
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost) return true;
             }
 
-            return false;
+                return false;
+        }
+
+        public void PayConstructionResources(Cell.CellType cellType)
+        {
+            if (cellType == Cell.CellType.Empty)
+            {
+                EmptySpot EmptyTile = new EmptySpot();
+
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
+                {
+                    iron -= EmptyTile.IronCost;
+                    food -= EmptyTile.FoodCost;
+                }
+            }
+            else if (cellType == Cell.CellType.IronSpot)
+            {
+                IronSpot EmptyTile = new IronSpot();
+
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
+                {
+                    iron -= EmptyTile.IronCost;
+                    food -= EmptyTile.FoodCost;
+                }
+            }
+            else if (cellType == Cell.CellType.IronSpot)
+            {
+                IronSpot EmptyTile = new IronSpot();
+
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
+                {
+                    iron -= EmptyTile.IronCost;
+                    food -= EmptyTile.FoodCost;
+                }
+            }
+            else if (cellType == Cell.CellType.FoodSpot)
+            {
+                FoodSpot EmptyTile = new FoodSpot();
+
+                if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
+                {
+                    iron -= EmptyTile.IronCost;
+                    food -= EmptyTile.FoodCost;
+                }
+            }
+            GD.Print("IronLeft = " + iron);
+            GD.Print("FoodLeft = " + food);
         }
 
         protected override void Dispose(bool pDisposing)

@@ -58,7 +58,7 @@ namespace Com.IsartDigital.ProjectName.Game
     }
     public class Cell : Node2D
     {
-        public enum CellType { Empty, Void}
+        public enum CellType { Empty, Void, House, IronSpot, FoodSpot}
         public CellType cellType = CellType.Empty;
         public Coordinates gridCoordinates;
 
