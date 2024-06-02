@@ -1,0 +1,168 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TopUi" type="PanelContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 28.0
+
+[node name="MarginContainer" type="MarginContainer" parent="TopUi"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 999.0
+margin_bottom = 109.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 10
+
+[node name="TopHBox" type="HBoxContainer" parent="TopUi/MarginContainer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 954.0
+margin_bottom = 74.0
+
+[node name="LeftTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
+margin_right = 231.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="IronContainer" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
+margin_right = 80.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/LeftTop/IronContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Iron" type="Label" parent="TopUi/MarginContainer/TopHBox/LeftTop/IronContainer"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 80.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Control" type="VSeparator" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 64.0
+
+[node name="FoodContainer" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
+margin_left = 98.0
+margin_right = 178.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/LeftTop/FoodContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/LeftTop/FoodContainer"]
+margin_left = 68.0
+margin_top = 22.0
+margin_right = 80.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="CenterTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
+margin_left = 235.0
+margin_right = 698.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+alignment = 1
+
+[node name="Black Hole turne" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/CenterTop"]
+margin_left = 191.0
+margin_right = 271.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+size_flags_stretch_ratio = 3.0
+alignment = 1
+
+[node name="Iron" type="Label" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="RightTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
+margin_left = 702.0
+margin_right = 934.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Acction left" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/RightTop"]
+margin_left = 54.0
+margin_right = 134.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+alignment = 2
+
+[node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/RightTop/Acction left"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/RightTop/Acction left"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Control" type="VSeparator" parent="TopUi/MarginContainer/TopHBox/RightTop"]
+margin_left = 138.0
+margin_right = 148.0
+margin_bottom = 64.0
+
+[node name="settlers" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/RightTop"]
+margin_left = 152.0
+margin_right = 232.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+alignment = 2
+
+[node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/RightTop/settlers"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/RightTop/settlers"]
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5

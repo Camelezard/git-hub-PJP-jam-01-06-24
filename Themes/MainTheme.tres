@@ -1,0 +1,52 @@
+[gd_resource type="Theme" load_steps=10 format=2]
+
+[ext_resource path="res://Assets/fonts/ressources/Race Sport.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.462745, 0.254902, 0.345098, 1 )
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color( 0.180392, 0.0588235, 0.160784, 1 )
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxLine" id=8]
+color = Color( 0.2, 0.678431, 0.713726, 1 )
+thickness = 5
+vertical = true
+
+[resource]
+Button/colors/font_color_hover = Color( 0.568627, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0.568627, 0, 0, 0.239216 )
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = SubResource( 4 )
+Button/styles/normal = SubResource( 5 )
+Button/styles/pressed = SubResource( 6 )
+GamePanel/base_type = "PanelContainer"
+GamePanel/styles/panel = SubResource( 7 )
+PanelContainer/styles/panel = SubResource( 7 )
+PopupDialog/styles/panel = SubResource( 7 )
+TitleButton/base_type = "Button"
+TitleButton/fonts/font = SubResource( 1 )
+VSeparator/constants/separation = 10
+VSeparator/styles/separator = SubResource( 8 )

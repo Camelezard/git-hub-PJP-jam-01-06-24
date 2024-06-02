@@ -7,16 +7,17 @@ namespace Com.IsartDigital.ProjectName.Game
     public class Ui_Manager : CanvasLayer
     {
         static private Ui_Manager instance;
-
         [Export] NodePath PlayButtonPath;
         [Export] NodePath SetingButtonPath;
         [Export] NodePath QuitButtonPath;
+        [Export] NodePath HelpButtonPath;
 
-        Button PlayButton;
-        Button SetingButton;
-        Button QuitButton;
+        [Export] PackedScene sceneHelpBox;
+        HelpOutside helpBox;
 
-		static public Ui_Manager GetInstance () {
+        Button HelpButton;
+
+        static public Ui_Manager GetInstance () {
 			if (instance == null) instance = new Ui_Manager();
 		    return instance;
 		}
@@ -32,31 +33,39 @@ namespace Com.IsartDigital.ProjectName.Game
             }
             instance = this;
 
-            PlayButton = GetNode<Button>(PlayButtonPath);
-            SetingButton = GetNode<Button>(SetingButtonPath);
-            QuitButton = GetNode<Button>(QuitButtonPath);
-
-            PlayButton.Connect("pressed", this, nameof(onPlayPressed));
-            SetingButton.Connect("pressed", this, nameof(onSettingPressed));
-            QuitButton.Connect("pressed", this, nameof(onQuitPressed));
+            HelpButton = GetNode<Button>(HelpButtonPath);
+            HelpButton.Connect("pressed", this, nameof(OnHelpPressed));
         }
 
-        private void onPlayPressed()
+        public void MainMenu()
+        {
+
+        }
+
+        private void OnPlayPressed()
         {
             GD.Print("play");
         }
 
-        private void onSettingPressed()
+        private void OnSettingPressed()
         {
             GD.Print("Setting");
         }
 
-        private void onQuitPressed()
+        private void OnQuitPressed()
         {
             GetTree().Quit();
         }
-
-        private void acctualizeTheHud()
+        private void OnHelpPressed()
+        {
+            if (helpBox == null)
+            {
+                helpBox = sceneHelpBox.Instance<HelpOutside>();
+                AddChild(helpBox);
+            }
+            helpBox.Visible = true;
+        }
+        private void UpdateHud()
         {
 
         }
