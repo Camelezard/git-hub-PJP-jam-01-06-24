@@ -24,6 +24,9 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] public int initialBlackholeradius = 3;
         public int Blackholeradius;
 
+        public static int settlerDead = 0;
+        public static int settlerSaved = 0;
+
         public int iron { get; set; }
         public int food { get; set; }
 

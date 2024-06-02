@@ -15,7 +15,7 @@
 script = ExtResource( 2 )
 CellSpritePath = NodePath("Sprite")
 LabelPath = NodePath("Label")
-CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), null, null, null ]
+CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), null, null ]
 ConstructorBoxFactory = ExtResource( 8 )
 settlersFactory = ExtResource( 9 )
 HomeAreaFactory = ExtResource( 10 )

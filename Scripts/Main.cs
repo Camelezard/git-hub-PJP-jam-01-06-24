@@ -38,6 +38,19 @@ namespace Com.IsartDigital.ProjectName.Game {
             //GetViewport().Connect(Signals.Ui.SCREEN_RESIZED, this, nameof(OnScreenSizeChanged));
         }
 
+        public override void _PhysicsProcess(float delta)
+        {
+            base._PhysicsProcess(delta);
+            if (ResourceManager.settlerSaved + ResourceManager.settlerDead >= 40) victory();
+
+            Vortex.GetInstance().QueueFree();
+        }
+
+        private void victory()
+        {
+
+        }
+
         protected override void Dispose(bool pDisposing)
 		{
 

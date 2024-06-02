@@ -24,6 +24,8 @@ namespace Com.IsartDigital.CCM.Managers
 
         private Vector2 tilemapSize = new Vector2();
 
+        
+
         [Export(PropertyHint.Range, "2,100")]
         public float Cell_size
         {
@@ -145,12 +147,12 @@ namespace Com.IsartDigital.CCM.Managers
             List<string> lMap = new List<string>
            {
 
-               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX",
-               "B X XXIXX    X    H           XXHXHXXXXXXXX",
-               "B   XX XH          F         XXHXHXXXXXXXXX",
-               "B   XFXIX X  X        XH     XXHHXHXXXXXXXX",
-               "B XXXX      XHI        X      XXHHXXXXXXXXX",
-               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX"
+               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXX ",
+               "B X XXIXX    X    H           XXWXWXXXXXX ",
+               "B   XX XH          F         XXWXWXXXXXXX ",
+               "B   XFXIX X  X        XH     XXWWXWXXXXXX ",
+               "B XXXX      XHI        X      XXWWXXXXXXX ",
+               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXX "
            };
 
             string line = lMap[0];
@@ -185,13 +187,16 @@ namespace Com.IsartDigital.CCM.Managers
                         case 'B':
                             lCellType = CellType.BlackHole;
                             break;
+                        case 'W':
+                            lCellType = CellType.Win;
+                            break;
                         default:
                            break;
                    }
 
                     grid[x,y] = CreateCell(lCellType, new Coordinates(x,y));
 
-                    if (lCellType == CellType.House)
+                    if (lCellType == CellType.House || lCellType == CellType.Win)
                     {
                         numberOfHouses.Add(grid[x, y]);
                         grid[x, y].CellSprite.Offset = new Vector2(0, -15);
@@ -241,6 +246,12 @@ namespace Com.IsartDigital.CCM.Managers
                 for (int j = (int)tilemapSize.y - 2; j >= 1; j--)
                 {
                     grid[i, j].Visible = false;
+                    if (grid[i, j].cellType == CellType.House && grid[i, j].settlersin > 0)
+                    {
+                        ResourceManager.settlerDead += grid[i, j].settlersin;
+                        grid[i, j].settlersin = 0;
+                        GD.Print(ResourceManager.settlerDead);
+                    }
                 }
             }
         }
