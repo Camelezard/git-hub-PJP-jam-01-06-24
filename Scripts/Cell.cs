@@ -59,7 +59,7 @@ namespace Com.IsartDigital.ProjectName.Game
     }
     public class Cell : Node2D
     {
-        public enum CellType { Void, Empty, House, IronSpot, FoodSpot}
+        public enum CellType { Void, Empty, House, IronSpot, FoodSpot, BlackHole}
         public CellType cellType = CellType.Empty;
         public Coordinates gridCoordinates;
 
@@ -75,5 +75,9 @@ namespace Com.IsartDigital.ProjectName.Game
             CellSprite.Texture = CellTexturList[(int)cellType];
         }
 
+        public void AdoptTheCellTexture()
+        {
+            CellSprite.Texture = CellTexturList[(int)cellType];
+        }
     }
 }

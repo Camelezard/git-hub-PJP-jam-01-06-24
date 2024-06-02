@@ -10,7 +10,7 @@
 [node name="Cell" type="Node2D"]
 script = ExtResource( 2 )
 CellSpritePath = NodePath("Sprite")
-CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), null, null, null, null ]
+CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), null, null ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

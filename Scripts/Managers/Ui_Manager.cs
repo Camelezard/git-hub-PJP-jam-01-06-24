@@ -53,21 +53,6 @@ namespace Com.IsartDigital.ProjectName.Game
             }
             instance = this;
 
-            PlayButton = GetNode<Button>(PlayButtonPath);
-            SetingButton = GetNode<Button>(SetingButtonPath);
-            QuitButton = GetNode<Button>(QuitButtonPath);
-
-            IronCountLabel = GetNode<Label>(IronCountLabelPath);
-            FoodCountLabel = GetNode<Label>(FoodCountLabelPath);
-
-            seltterCountLabel = GetNode<Label>(seltterCountLabelPath);
-            BlackHoleTurnLabel = GetNode<Label>(BlackHoleTurnLabelPath);
-            AcctionLabel = GetNode<Label>(AcctionLabelPath);
-
-            //PlayButton.Connect("pressed", this, nameof(onPlayPressed));
-            //SetingButton.Connect("pressed", this, nameof(onSettingPressed));
-            //QuitButton.Connect("pressed", this, nameof(onQuitPressed));
-
             UpdateHud();
 
             HelpButton = GetNode<Button>(HelpButtonPath);
@@ -106,13 +91,13 @@ namespace Com.IsartDigital.ProjectName.Game
 
         public void UpdateHud()
         {
-            IronCountLabel.Text = ResourceManager.GetInstance().iron.ToString();
-            FoodCountLabel.Text = ResourceManager.GetInstance().food.ToString();
-
-            seltterCountLabel.Text = ResourceManager.GetInstance().settlers.ToString();
-
-            BlackHoleTurnLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
-            AcctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
+            //IronCountLabel.Text = ResourceManager.GetInstance().iron.ToString();
+            //FoodCountLabel.Text = ResourceManager.GetInstance().food.ToString();
+            //
+            //seltterCountLabel.Text = ResourceManager.GetInstance().settlers.ToString();
+            //
+            //BlackHoleTurnLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
+            //AcctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
         }
 
         protected override void Dispose(bool pDisposing)

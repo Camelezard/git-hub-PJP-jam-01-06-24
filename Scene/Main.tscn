@@ -10,17 +10,16 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
-Cell_size = 100.0
+Cell_size = 37.568
 view_size = Vector2( 10.957, 0 )
 
 [node name="GridManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
-Cell_size = 100.0
 cellFactory = ExtResource( 4 )
 
 [node name="ResourcesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
-initailSettlers = 10
+initailSettlers = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, -300 )
@@ -29,22 +28,11 @@ script = ExtResource( 2 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
-<<<<<<< HEAD
-PlayButtonPath = NodePath("Play")
-SetingButtonPath = NodePath("Setting")
-QuitButtonPath = NodePath("Quit")
-IronCountLabelPath = NodePath("IronContainer/Iron")
-FoodCountLabelPath = NodePath("FoodContainer/Food")
-seltterCountLabelPath = NodePath("settlers/settlers")
-BlackHoleTurnLabelPath = NodePath("Black Hole turne/Iron")
-AcctionLabelPath = NodePath("Acction left/acction")
-=======
 PlayButtonPath = NodePath("")
 SetingButtonPath = NodePath("")
 QuitButtonPath = NodePath("")
 HelpButtonPath = NodePath("Help")
 sceneHelpBox = ExtResource( 7 )
->>>>>>> UIHandle
 
 [node name="Help" type="Button" parent="UI"]
 margin_left = 989.0
@@ -52,106 +40,3 @@ margin_top = 567.0
 margin_right = 1007.0
 margin_bottom = 587.0
 text = "?"
-<<<<<<< HEAD
-
-[node name="IronContainer" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 976.0
-margin_top = 9.0
-margin_right = 1016.0
-margin_bottom = 49.0
-rect_pivot_offset = Vector2( 22, 18 )
-
-[node name="Iron" type="Label" parent="CanvasLayer/IronContainer"]
-margin_top = 13.0
-margin_right = 8.0
-margin_bottom = 27.0
-text = "0"
-align = 1
-valign = 1
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/IronContainer"]
-position = Vector2( -9, 17 )
-scale = Vector2( 0.296875, 0.296875 )
-texture = ExtResource( 7 )
-
-[node name="FoodContainer" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 904.0
-margin_top = 10.0
-margin_right = 944.0
-margin_bottom = 50.0
-rect_pivot_offset = Vector2( 22, 18 )
-
-[node name="Food" type="Label" parent="CanvasLayer/FoodContainer"]
-margin_top = 13.0
-margin_right = 8.0
-margin_bottom = 27.0
-text = "0"
-align = 1
-valign = 1
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/FoodContainer"]
-position = Vector2( -9, 17 )
-scale = Vector2( 0.296875, 0.296875 )
-texture = ExtResource( 7 )
-
-[node name="Black Hole turne" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 60.0
-margin_top = 13.0
-margin_right = 100.0
-margin_bottom = 53.0
-rect_pivot_offset = Vector2( 22, 18 )
-
-[node name="Iron" type="Label" parent="CanvasLayer/Black Hole turne"]
-margin_top = 13.0
-margin_right = 8.0
-margin_bottom = 27.0
-text = "0"
-align = 1
-valign = 1
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/Black Hole turne"]
-position = Vector2( -9, 17 )
-scale = Vector2( 0.296875, 0.296875 )
-texture = ExtResource( 7 )
-
-[node name="Acction left" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 492.0
-margin_top = 17.0
-margin_right = 532.0
-margin_bottom = 57.0
-rect_pivot_offset = Vector2( 22, 18 )
-
-[node name="acction" type="Label" parent="CanvasLayer/Acction left"]
-margin_top = 13.0
-margin_right = 8.0
-margin_bottom = 27.0
-text = "0"
-align = 1
-valign = 1
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/Acction left"]
-position = Vector2( -9, 17 )
-scale = Vector2( 0.296875, 0.296875 )
-texture = ExtResource( 7 )
-
-[node name="settlers" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 111.0
-margin_top = 13.0
-margin_right = 151.0
-margin_bottom = 53.0
-rect_pivot_offset = Vector2( 22, 18 )
-
-[node name="settlers" type="Label" parent="CanvasLayer/settlers"]
-margin_top = 13.0
-margin_right = 8.0
-margin_bottom = 27.0
-text = "0"
-align = 1
-valign = 1
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/settlers"]
-position = Vector2( -9, 17 )
-scale = Vector2( 0.296875, 0.296875 )
-texture = ExtResource( 7 )
-=======
->>>>>>> UIHandle

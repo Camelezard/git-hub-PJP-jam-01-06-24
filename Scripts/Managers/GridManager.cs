@@ -21,6 +21,8 @@ namespace Com.IsartDigital.CCM.Managers
 
         public List<Cell> numberOfHouses = new List<Cell>();
 
+        private Vector2 tilemapSize = new Vector2();
+
         [Export(PropertyHint.Range, "2,100")]
         public float Cell_size
         {
@@ -125,25 +127,25 @@ namespace Com.IsartDigital.CCM.Managers
        {
            List<string> lMap = new List<string>
            {
-               "     XXWXXX     ",
-               "   XXWXXXXXWX   ",
-               " #XXXXX#XXXXWXX ",
-               "WXXX#XXXXXWXX#XX",
-               "XXXWXXWXHHXXX#XX",
-               "XX##XXX#HHWWXXXX",
-               "XXXXXWXXXXX#XXXW",
-               "XX#XXXXWXXXXWXXX",
-               " XXXXWXXX#XXXXX ",
-               "   XWXXXXWXXX   ",
-               "     XXWXXX     "
+               "              ",
+               "              ",
+               "     XXXXX    ",
+               "     XBXXI    ",
+               "     XXIXX    ",
+               "     XX XH    ",
+               "     XFXIX    ",
+               "              ",
+               "              "
            };
-           
-           CellType lCellType = CellType.Void;
+
+            string line = lMap[0];
             
 
+           CellType lCellType = CellType.Void;
+            
            for (int y = lMap.Count-1; y >= 0; y--)
            {
-               string line = lMap[y];
+               line = lMap[y];
                for (int x = 0; x < line.Length; x++)
                {
                    char character = line[x];
@@ -156,14 +158,17 @@ namespace Com.IsartDigital.CCM.Managers
                         case 'X':
                             lCellType = CellType.Empty;
                             break;
-                        case '#':
+                        case 'I':
                            lCellType = CellType.IronSpot;
                            break;
-                       case 'W':
+                       case 'F':
                            lCellType = CellType.FoodSpot;
                            break;
                         case 'H':
                             lCellType = CellType.House;
+                            break;
+                        case 'B':
+                            lCellType = CellType.BlackHole;
                             break;
                         default:
                            break;
@@ -179,6 +184,8 @@ namespace Com.IsartDigital.CCM.Managers
                     else if (lCellType == CellType.IronSpot) grid[x, y].CellSprite.Offset = new Vector2(0, -1);
                 }
            }
+
+            tilemapSize = new Vector2(line.Length, lMap.Count);
         }
 
         private void checkNumberOfHouseInTheWorld()
@@ -190,13 +197,36 @@ namespace Com.IsartDigital.CCM.Managers
             GD.Print(ResourceManager.GetInstance().settlers);
         }
 
+        public void BlackHoleDestruction(int destructionRadiu = 1)
+        {
+            for (int i = 0; i < destructionRadiu; i++)
+            {
+                for (int j = 0; j < destructionRadiu; j++)
+                {
+                    grid[i, j].Visible = false;
+                }
+            }
+        }
+
         private void checkTheTileSelected()
         {
-            Cell lCel = grid[VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y];
+            Coordinates corodoneeOfTheTile = new Coordinates( VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y);
+            Cell lCel = grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y];
+
+            //if(grid.Co)
 
             switch (lCel.cellType)
             {
                 case CellType.Void:
+                    
+                    if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                    grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                    grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
+                    grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void)
+
+                    lCel.cellType = CellType.Empty;
+                    lCel.AdoptTheCellTexture();
+
                     break;
                 case CellType.Empty:
                     break;

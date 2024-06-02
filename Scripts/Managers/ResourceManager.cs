@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Com.IsartDigital.CCM.Managers;
 
 //Author : Daniel Degott
 namespace Com.IsartDigital.ProjectName.Game
@@ -187,14 +188,23 @@ namespace Com.IsartDigital.ProjectName.Game
         {
             acction -= acctionNumber;
             if (acction <= 0) EndTheTurn();
+
+            GD.Print(acction);
         }
         
         public void EndTheTurn()
         {
             BlackHoleCooldown--;
+            GD.Print("EndOfTurn");
 
-            if (BlackHoleCooldown <= 0) { }//*blackHole*//
+            if (BlackHoleCooldown <= 0) { BlackHoleTurn(); }
             else StartTheTurn();
+        }
+
+        public void BlackHoleTurn()
+        {
+            GridManager.GetInstance().BlackHoleDestruction(3);
+            BlackHoleCooldown = initialBlackholeCooldown;
         }
 
         public void StartTheTurn()
