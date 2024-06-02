@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TIle.png-21265301d8df64056671496867bb5450.stex"
+path="res://.import/TIle.png-c7b13b83cbbc07c1248a7f5eb8a3f1b9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot/Graphic/Sprite/TIle.png"
-dest_files=[ "res://.import/TIle.png-21265301d8df64056671496867bb5450.stex" ]
+source_file="res://Assets/Textures/Graphic/Sprite/TIle.png"
+dest_files=[ "res://.import/TIle.png-c7b13b83cbbc07c1248a7f5eb8a3f1b9.stex" ]
 
 [params]
 

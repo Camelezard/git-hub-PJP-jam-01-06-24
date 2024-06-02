@@ -12,26 +12,6 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] NodePath QuitButtonPath;
         [Export] NodePath HelpButtonPath;
 
-        [Export] NodePath IronCountLabelPath;
-        [Export] NodePath FoodCountLabelPath;
-
-        [Export] NodePath seltterCountLabelPath;
-        [Export] NodePath BlackHoleTurnLabelPath;
-
-        [Export] NodePath AcctionLabelPath;
-
-        Button PlayButton;
-        Button SetingButton;
-        Button QuitButton;
-
-        Label IronCountLabel;
-        Label FoodCountLabel;
-
-        Label seltterCountLabel;
-        Label BlackHoleTurnLabel;
-
-        Label AcctionLabel;
-
         [Export] PackedScene sceneHelpBox;
         HelpOutside helpBox;
 
@@ -91,13 +71,13 @@ namespace Com.IsartDigital.ProjectName.Game
 
         public void UpdateHud()
         {
-            //IronCountLabel.Text = ResourceManager.GetInstance().iron.ToString();
-            //FoodCountLabel.Text = ResourceManager.GetInstance().food.ToString();
-            //
-            //seltterCountLabel.Text = ResourceManager.GetInstance().settlers.ToString();
-            //
-            //BlackHoleTurnLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
-            //AcctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
+            GameHud.GetInstance().ironLabel.Text = ResourceManager.GetInstance().iron.ToString();
+            GameHud.GetInstance().foodLabel.Text = ResourceManager.GetInstance().food.ToString();
+
+            GameHud.GetInstance().settlerLabel.Text = ResourceManager.GetInstance().settlers.ToString();
+
+            GameHud.GetInstance().BlsckHoleCooldownLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
+            GameHud.GetInstance().acctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
         }
 
         protected override void Dispose(bool pDisposing)

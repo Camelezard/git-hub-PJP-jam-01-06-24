@@ -8,6 +8,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -678, -387 )
 script = ExtResource( 2 )
+PlayButtonPath = NodePath("VBoxContainer/Button")
+SettingButtonPath = NodePath("VBoxContainer/Button2")
+QuitButtonPath = NodePath("VBoxContainer/Button3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0

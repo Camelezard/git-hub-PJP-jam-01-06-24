@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileHouse.png-7797d827ccad7abd5d11c2d087ccc5cd.stex"
+path="res://.import/BlackHoleVortex.png-a145ee8c86b332037255aa73a498291d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot/Graphic/Sprite/TileHouse.png"
-dest_files=[ "res://.import/TileHouse.png-7797d827ccad7abd5d11c2d087ccc5cd.stex" ]
+source_file="res://Assets/Textures/Graphic/Sprite/BlackHoleVortex.png"
+dest_files=[ "res://.import/BlackHoleVortex.png-a145ee8c86b332037255aa73a498291d.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

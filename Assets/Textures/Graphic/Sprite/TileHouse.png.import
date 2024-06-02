@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TIleWater.png-af3d900419fa063b6775d13661ee39e4.stex"
+path="res://.import/TileHouse.png-c15bfc5b209bf2bfea770976a02d4d33.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot/Graphic/Sprite/TIleWater.png"
-dest_files=[ "res://.import/TIleWater.png-af3d900419fa063b6775d13661ee39e4.stex" ]
+source_file="res://Assets/Textures/Graphic/Sprite/TileHouse.png"
+dest_files=[ "res://.import/TileHouse.png-c15bfc5b209bf2bfea770976a02d4d33.stex" ]
 
 [params]
 

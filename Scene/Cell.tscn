@@ -1,16 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Cell.cs" type="Script" id=2]
-[ext_resource path="res://Godot/Graphic/Sprite/TIle.png" type="Texture" id=3]
-[ext_resource path="res://Godot/Graphic/Sprite/TileHouse.png" type="Texture" id=4]
-[ext_resource path="res://Godot/Graphic/Sprite/TileIron.png" type="Texture" id=5]
-[ext_resource path="res://Godot/Graphic/Sprite/TIleWater.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/TIle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/TileHouse.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/TileIron.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/TIleWater.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/BlackHole.png" type="Texture" id=7]
+[ext_resource path="res://Scene/Ui/ConstructBox.tscn" type="PackedScene" id=8]
 
 [node name="Cell" type="Node2D"]
 script = ExtResource( 2 )
 CellSpritePath = NodePath("Sprite")
-CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), null, null ]
+CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), null, null, null ]
+ConstructorBoxFactory = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
