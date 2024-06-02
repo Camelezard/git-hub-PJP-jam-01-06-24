@@ -66,14 +66,23 @@ namespace Com.IsartDigital.ProjectName.Game
         public Sprite CellSprite;
 
         [Export] private NodePath CellSpritePath;
+        [Export] private NodePath LabelPath;
 
         [Export] private List<Texture> CellTexturList = new List<Texture>();
 
         [Export] private PackedScene ConstructorBoxFactory;
 
+        [Export] PackedScene settlersFactory;
+
+        [Export] PackedScene HomeAreaFactory;
+
+        public int settlersin;
+        public Label lLabel;
+
         public override void _Ready()
         {
             CellSprite = GetNode<Sprite>(CellSpritePath);
+            lLabel = GetNode<Label>(LabelPath);
             CellSprite.Texture = CellTexturList[(int)cellType];
         }
 
@@ -81,7 +90,12 @@ namespace Com.IsartDigital.ProjectName.Game
         {
             CellSprite.Texture = CellTexturList[(int)cellType];
 
-            if (cellType == CellType.House)CellSprite.Offset = new Vector2(0, -15);
+            if (cellType == CellType.House)
+            {
+                CellSprite.Offset = new Vector2(0, -15);
+                lLabel.Text = settlersin.ToString();
+                lLabel.Show();
+            }
             else if (cellType == CellType.IronSpot) CellSprite.Offset = new Vector2(0, -1);
             else CellSprite.Offset = Vector2.Zero;
         }
@@ -97,6 +111,30 @@ namespace Com.IsartDigital.ProjectName.Game
             cellType = pcellType;
             
             AdoptTheCellTexture();
+        }
+
+        public void SpawnSettler()
+        {
+            if (settlersin > 0)
+            {
+                Node2D lsettler = (Node2D)settlersFactory.Instance();
+                AddChild(lsettler);
+
+                settlersin--;
+                ShowTheNumberOfSettlerIn();
+            }
+        }
+
+        public void ShowTheNumberOfSettlerIn()
+        {
+            lLabel.Show();
+            lLabel.Text = settlersin.ToString();
+        }
+
+        public void SpawnAHomeArea()
+        {
+            Node2D lsettler = (Node2D)settlersFactory.Instance();
+            AddChild(lsettler);
         }
     }
 }

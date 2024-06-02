@@ -38,6 +38,8 @@ namespace Com.IsartDigital.CCM.Managers
         public Cell[,] grid; // [0,0] is bottom left (the blackhole); 
         private Node2D gridContainer;
 
+        Cell FarestHouse;
+
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Signals
 
 
@@ -68,6 +70,10 @@ namespace Com.IsartDigital.CCM.Managers
             CreateGrid(50,50);
 
             initialisateTheLevelOne();
+
+            serchCraftTile();
+
+            checkFarestHouse();
         }
         public override void _Process(float delta)
         {
@@ -129,6 +135,11 @@ namespace Com.IsartDigital.CCM.Managers
             return VectorToGrid(lPosition).x;
         }
 
+        public Cell SettlersConcertion(Vector2 lPosition)
+        {
+            return grid[ VectorToGrid(lPosition).x, VectorToGrid(lPosition).y];
+        }
+
         private void initialisateTheLevelOne()
        {
             List<string> lMap = new List<string>
@@ -137,8 +148,8 @@ namespace Com.IsartDigital.CCM.Managers
                "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX",
                "B X XXIXX    X    H           XXHXHXXXXXXXX",
                "B   XX XH          F         XXHXHXXXXXXXXX",
-               "B   XFXIX X            X     XXHHXHXXXXXXXX",
-               "B XXXX XH     I       XH      XXHHXXXXXXXXX",
+               "B   XFXIX X  X        XH     XXHHXHXXXXXXXX",
+               "B XXXX      XHI        X      XXHHXXXXXXXXX",
                "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX"
            };
 
@@ -184,6 +195,8 @@ namespace Com.IsartDigital.CCM.Managers
                     {
                         numberOfHouses.Add(grid[x, y]);
                         grid[x, y].CellSprite.Offset = new Vector2(0, -15);
+                        grid[x, y].settlersin = 10;
+                        grid[x, y].ShowTheNumberOfSettlerIn();
                     }
                     else if (lCellType == CellType.IronSpot) grid[x, y].CellSprite.Offset = new Vector2(0, -1);
                     else grid[x, y].CellSprite.Offset = Vector2.Zero;
@@ -196,11 +209,21 @@ namespace Com.IsartDigital.CCM.Managers
 
         private void checkNumberOfHouseInTheWorld()
         {
-            int lNumberOfsettlersMax = numberOfHouses.Count * 5;
-            int lNumberOfSettlers = ResourceManager.GetInstance().settlers;
-            if(lNumberOfSettlers > lNumberOfsettlersMax) { ResourceManager.GetInstance().settlers = lNumberOfsettlersMax; }
+            //int lNumberOfsettlersMax = numberOfHouses.Count * 5;
+            //int lNumberOfSettlers = ResourceManager.GetInstance().settlers;
+            //if(lNumberOfSettlers > lNumberOfsettlersMax) { ResourceManager.GetInstance().settlers = lNumberOfsettlersMax; }
+            //
+            //GD.Print(ResourceManager.GetInstance().settlers);
+        }
 
-            GD.Print(ResourceManager.GetInstance().settlers);
+        private void checkFarestHouse()
+        {
+            
+            //foreach (Cell house in numberOfHouses)
+            //{
+            //    if (house.gridCoordinates.x < 12) GD.Print(house.GlobalPosition);
+            //    FarestHouse = house;
+            //}
         }
 
         public void BlackHoleDestruction(int destructionRadiu = 1)
@@ -238,18 +261,18 @@ namespace Com.IsartDigital.CCM.Managers
             {
                 case CellType.Void:
 
-                    if (corodoneeOfTheTile.x >= 0
-                        && corodoneeOfTheTile.y >= 0
-                        && corodoneeOfTheTile.x < tilemapSize.x
-                        && corodoneeOfTheTile.y < tilemapSize.y)
+                if (corodoneeOfTheTile.x >= 0
+                && corodoneeOfTheTile.y >= 0
+                && corodoneeOfTheTile.x < tilemapSize.x
+                && corodoneeOfTheTile.y < tilemapSize.y)
                 {
 
-                        if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
-                        grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
-                        grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
-                        grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void
-                        )
-                        lCel.creatConstructorBox();
+                     if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                     grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                     grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
+                     grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void
+                     )
+                     lCel.creatConstructorBox();
                 }
                     
 
@@ -257,6 +280,7 @@ namespace Com.IsartDigital.CCM.Managers
                 case CellType.Empty:
                     break;
                 case CellType.House:
+                    lCel.SpawnSettler();
                     break;
                 case CellType.IronSpot:
                     ResourceManager.GetInstance().ColectIron();
@@ -267,6 +291,40 @@ namespace Com.IsartDigital.CCM.Managers
                 default:
                     break;
             }
+        }
+
+        public void serchCraftTile()
+        {
+            Cell lCel = grid[1, 1];
+            
+            for (int i = 0; i < (int)tilemapSize.x - 14; i++)
+            {
+                for (int j = (int)tilemapSize.y - 2; j >= 1; j--)
+                {
+                    if (grid[i, j].cellType == CellType.Void)
+                    {
+                        lCel = grid[i, j];
+            
+                     if ((grid[i - 1, j].cellType != CellType.Void && grid[i - 1, j].cellType != CellType.BlackHole) ||
+                     (grid[i + 1, j].cellType != CellType.Void && grid[i + 1, j].cellType != CellType.BlackHole) ||
+                     (grid[i, j - 1].cellType != CellType.Void && grid[i, j - 1].cellType != CellType.BlackHole) ||
+                     (grid[i, j + 1].cellType != CellType.Void && grid[i, j + 1].cellType != CellType.BlackHole)
+                     ) grid[i, j].CellSprite.Texture = GD.Load<Texture>("res://Assets/Textures/Graphic/Sprite/Select.png");
+                    }
+                }
+            }
+        }
+
+        private void CanCraft()
+        {
+            //for (int i = 0; i < 20 - 1; i++)
+            //{
+            //    for (int j = (int)tilemapSize.y - 2; j >= 1; j--)
+            //    {
+            //        grid[i, j].CellSprite.Texture = GD.Load<Texture>("res://Assets/Textures/Graphic/Sprite/Select.png");
+            //    }
+            //}
+            //
         }
     }
     

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 23.0
+height = 46.0
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Home" type="Label" parent="."]
+margin_left = -32.0
+margin_top = -78.0
+margin_right = 30.0
+margin_bottom = -59.0
+text = "Home"

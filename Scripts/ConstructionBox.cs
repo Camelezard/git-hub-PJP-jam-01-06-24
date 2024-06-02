@@ -2,6 +2,7 @@ using Godot;
 using System;
 using static Com.IsartDigital.ProjectName.Game.Cell;
 using Com.IsartDigital.ProjectName.Game;
+using Com.IsartDigital.CCM.Managers;
 
 //Author : Daniel Degott
 namespace Com.IsartDigital.ProjectName{
@@ -125,6 +126,8 @@ namespace Com.IsartDigital.ProjectName{
         {
             if (pDisposing && instance == this) instance = null;
             base.Dispose(pDisposing);
+
+            GridManager.GetInstance().serchCraftTile();
         }
     }
 }
