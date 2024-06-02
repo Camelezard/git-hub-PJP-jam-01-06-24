@@ -4,6 +4,7 @@ using Com.IsartDigital.ProjectName.Utils;
 using Godot;
 using System.Collections.Generic;
 using static Com.IsartDigital.ProjectName.Game.Cell;
+using Com.IsartDigital.ProjectName;
 //Author : Sophia Solignac
 namespace Com.IsartDigital.CCM.Managers
 {
@@ -34,7 +35,7 @@ namespace Com.IsartDigital.CCM.Managers
             }
         }
 
-        private Cell[,] grid; // [0,0] is bottom left (the blackhole); 
+        public Cell[,] grid; // [0,0] is bottom left (the blackhole); 
         private Node2D gridContainer;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Signals
@@ -72,10 +73,10 @@ namespace Com.IsartDigital.CCM.Managers
         {
             //GD.Print(VectorToGrid(GetGlobalMousePosition()));
 
-            if(Input.IsActionJustPressed("left_clic"))
+            if(Input.IsActionJustPressed("left_clic") && ConstructionBox.instance == null)
             {
                 checkTheTileSelected();
-                //checkNumberOfHouseInTheWorld();
+                checkNumberOfHouseInTheWorld();
             }
         }
 
@@ -123,16 +124,22 @@ namespace Com.IsartDigital.CCM.Managers
             return new Coordinates(Mathf.FloorToInt((pCoords.x ) / cell_size), -Mathf.FloorToInt((pCoords.y + cell_size) / cell_size));
         }
 
+        public int BlackHoleConcertion(Vector2 lPosition)
+        {
+            return VectorToGrid(lPosition).x;
+        }
+
         private void initialisateTheLevelOne()
        {
             List<string> lMap = new List<string>
            {
-               "            ",
-               "XXXXX       ",
-               "XBXXI       ",
-               "XXIXX       ",
-               "XX XH       ",
-               "XFXIX       "
+
+               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX",
+               "B X XXIXX    X    H           XXHXHXXXXXXXX",
+               "B   XX XH          F         XXHXHXXXXXXXXX",
+               "B   XFXIX X            X     XXHHXHXXXXXXXX",
+               "B XXXX XH     I       XH      XXHHXXXXXXXXX",
+               "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBXXXXXXXXXXXX"
            };
 
             string line = lMap[0];
@@ -198,9 +205,17 @@ namespace Com.IsartDigital.CCM.Managers
 
         public void BlackHoleDestruction(int destructionRadiu = 1)
         {
-            for (int i = 0; i < destructionRadiu; i++)
+            //for (int i = 0; i < destructionRadiu; i++)
+            //{
+            //    for (int j = 0; j < destructionRadiu; j++)
+            //    {
+            //        grid[i, j].Visible = false;
+            //    }
+            //}
+
+            for (int i = 0; i < destructionRadiu - 1; i++)
             {
-                for (int j = 0; j < destructionRadiu; j++)
+                for (int j = (int)tilemapSize.y - 2; j >= 1; j--)
                 {
                     grid[i, j].Visible = false;
                 }
@@ -223,19 +238,18 @@ namespace Com.IsartDigital.CCM.Managers
             {
                 case CellType.Void:
 
-                if (corodoneeOfTheTile.x >= 1
-                    && corodoneeOfTheTile.x <= tilemapSize.x-1
-                    && corodoneeOfTheTile.y >= 1
-                    && corodoneeOfTheTile.y <= tilemapSize.y-1
-                    )
+                    if (corodoneeOfTheTile.x >= 0
+                        && corodoneeOfTheTile.y >= 0
+                        && corodoneeOfTheTile.x < tilemapSize.x
+                        && corodoneeOfTheTile.y < tilemapSize.y)
                 {
-                    GD.Print(corodoneeOfTheTile.y);
+
                         if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
                         grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
                         grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
                         grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void
                         )
-                    lCel.creatConstructorBox();
+                        lCel.creatConstructorBox();
                 }
                     
 

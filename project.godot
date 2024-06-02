@@ -12,7 +12,13 @@ config_version=4
 
 config/name="Godot"
 run/main_scene="res://Scene/Main.tscn"
+boot_splash/bg_color=Color( 0.490196, 0.243137, 0.529412, 1 )
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1224
+window/size/height=800
 
 [global]
 
@@ -42,5 +48,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.560784, 0.207843, 0.607843, 1 )
 environment/default_environment="res://default_env.tres"

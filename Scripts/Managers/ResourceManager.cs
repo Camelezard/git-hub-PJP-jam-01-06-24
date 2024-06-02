@@ -28,7 +28,7 @@ namespace Com.IsartDigital.ProjectName.Game
         public int food { get; set; }
 
         public int settlers { get; set; }
-        public int acction { get; set; }
+        //public int acction { get; set; }
 
         public int BlackHoleCooldown { get; set; }
 
@@ -40,32 +40,27 @@ namespace Com.IsartDigital.ProjectName.Game
 
         public class EmptySpot : Building
         {
-            public override int IronCost => 1;
-            public override int FoodCost => 1;
+            public override int IronCost => 2;
+            public override int FoodCost => 2;
         }
 
         public class House : Building
         {
-            public override int IronCost => 1;
-            public override int FoodCost => 5;
+            public override int IronCost => 10;
+            public override int FoodCost => 10;
         }
 
-        public class School : Building
-        {
-            public override int IronCost => 5;
-            public override int FoodCost => 1;
-        }
 
         public class FoodSpot : Building
         {
-            public override int IronCost => 2;
+            public override int IronCost => 5;
             public override int FoodCost => 0;
         }
 
         public class IronSpot : Building
         {
             public override int IronCost => 0;
-            public override int FoodCost => 2;
+            public override int FoodCost => 5;
         }
 
         static public ResourceManager GetInstance () {
@@ -192,37 +187,35 @@ namespace Com.IsartDigital.ProjectName.Game
 
         public void CraftAtile()
         {
-            UseAcction();
+            //UseAcction();
         }
 
         public void UseAcction(int acctionNumber = 1)
         {
-            acction -= acctionNumber;
-            if (acction <= 0) EndTheTurn();
-
-            GD.Print(acction);
+            //acction -= acctionNumber;
+            //if (acction <= 0) EndTheTurn();
+            //
+            //GD.Print(acction);
         }
         
         public void EndTheTurn()
         {
-            BlackHoleCooldown--;
-            GD.Print("EndOfTurn");
-
-            if (BlackHoleCooldown <= 0) { BlackHoleTurn(); }
-            else StartTheTurn();
+            //BlackHoleCooldown--;
+            //GD.Print("EndOfTurn");
+            //
+            //if (BlackHoleCooldown <= 0) { BlackHoleTurn(); }
+            //else StartTheTurn();
         }
 
         public void BlackHoleTurn()
         {
             GridManager.GetInstance().BlackHoleDestruction(Blackholeradius);
-            Blackholeradius += initialBlackholeradius;
-            BlackHoleCooldown = initialBlackholeCooldown;
         }
 
         public void StartTheTurn()
         {
-            acction = settlers;
-            food -= settlers;
+            ////acction = settlers;
+            //food -= settlers;
         }
 
         protected override void Dispose(bool pDisposing)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Camera.cs" type="Script" id=1]
 [ext_resource path="res://Scene/Cell.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scene/Vortex.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Managers/GridManager.cs" type="Script" id=4]
 
 [node name="playground" type="Node2D"]
@@ -14,3 +15,7 @@ cellFactory = ExtResource( 2 )
 position = Vector2( 512, -300 )
 current = true
 script = ExtResource( 1 )
+
+[node name="Vortex" parent="." instance=ExtResource( 3 )]
+position = Vector2( 139, -330 )
+rotationSpeed = 50.0

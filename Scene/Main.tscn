@@ -17,11 +17,11 @@ playgoudFactory = ExtResource( 2 )
 
 [node name="ResourcesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
-initailIron = 1
-initailFood = 1
-initailSettlers = 5
-initialBlackholeCooldown = 2
-initialBlackholeradius = 2
+initailIron = 20
+initailFood = 20
+initailSettlers = 20
+initialBlackholeCooldown = 1
+initialBlackholeradius = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
@@ -33,10 +33,9 @@ sceneHelpBox = ExtResource( 7 )
 
 [node name="Control" parent="UI" instance=ExtResource( 8 )]
 visible = false
-margin_bottom = -464.0
+margin_bottom = -670.0
 
 [node name="Help" type="Button" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1001.0
@@ -56,7 +55,22 @@ margin_bottom = -2.0
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 2000, 2000 )
 
-[node name="BackGround" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 488, -175 )
-scale = Vector2( 2, 2 )
+[node name="BackGround2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 231, -311 )
 texture = ExtResource( 3 )
+
+[node name="BackGround" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1231, -311 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="BackGround3" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 231, 689 )
+texture = ExtResource( 3 )
+flip_v = true
+
+[node name="BackGround4" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1231, 689 )
+texture = ExtResource( 3 )
+flip_h = true
+flip_v = true
