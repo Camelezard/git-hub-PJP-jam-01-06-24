@@ -43,6 +43,7 @@ namespace Com.IsartDigital.ProjectName {
         {
             Main.instance.startLevelOne();
             Hide();
+            SoundManager.GetInstance().Play(SoundManager.MusicType.IN_GAME, SoundManager.TRANSITION_NORMAL_DURATION);
         }
 
         private void SettingPressed()

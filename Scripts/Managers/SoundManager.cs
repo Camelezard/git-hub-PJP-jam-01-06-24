@@ -2,7 +2,7 @@ using Com.IsartDigital.ProjectName;
 using Godot;
 using System.Collections.Generic;
 
-// Author : Dlan Lupon
+// Author : Dylan Lupon
 // Date : 06 / 02 / 2024
 public class SoundManager : Node2D
 {
@@ -57,11 +57,14 @@ public class SoundManager : Node2D
     private int currentMusicPlayerIndex = 0;
 
     // TRANSITIONS
+    public const float TRANSITION_LONG_DURATION = 10f;
+    public const float TRANSITION_NORMAL_DURATION = 5f;
+    public const float TRANSITION_SMALL_DURATION = 2.5f;
     private const float TRANSITION_DEFAULT_DURATION = 0f;
     private Tween transitionTween = new Tween();
 
     // INIT PROPERTIES
-    private const float MAIN_MENU_FADE_IN = 5f;
+    private const float MAIN_MENU_FADE_IN = 0f;
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // INITIALIZATION
 

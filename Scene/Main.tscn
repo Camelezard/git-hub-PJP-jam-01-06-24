@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=1]
-[ext_resource path="res://Scene/Playground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scene/SoundManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Textures/Graphic/BackGround.png" type="Texture" id=3]
+[ext_resource path="res://Scene/Playground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Managers/ResourceManager.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/Managers/Ui_Manager.cs" type="Script" id=6]
 [ext_resource path="res://Scene/Ui/Help.tscn" type="PackedScene" id=7]
@@ -13,7 +14,9 @@
 script = ExtResource( 1 )
 Cell_size = 37.568
 view_size = Vector2( 10.957, 0 )
-playgoudFactory = ExtResource( 2 )
+playgoudFactory = ExtResource( 4 )
+
+[node name="SoundManager" parent="." instance=ExtResource( 2 )]
 
 [node name="ResourcesManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -21,13 +24,12 @@ initailIron = 1
 initailFood = 1
 initailSettlers = 5
 initialBlackholeCooldown = 2
-initialBlackholeradius = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
-PlayButtonPath = NodePath("")
-SetingButtonPath = NodePath("")
-QuitButtonPath = NodePath("")
+PlayButtonPath = NodePath("MainMenu/VBoxContainer/Button")
+SetingButtonPath = NodePath("MainMenu/VBoxContainer/Button2")
+QuitButtonPath = NodePath("MainMenu/VBoxContainer/Button3")
 HelpButtonPath = NodePath("Help")
 sceneHelpBox = ExtResource( 7 )
 
@@ -60,3 +62,5 @@ motion_mirroring = Vector2( 2000, 2000 )
 position = Vector2( 488, -175 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
+
+[editable path="UI/MainMenu"]
