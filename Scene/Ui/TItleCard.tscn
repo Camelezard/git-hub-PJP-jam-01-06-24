@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Textures/Graphic/BackGround.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/MainMenu.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Textures/UI/MainMenu/BlackHole.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/UI/MainMenu/Title.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/UI/MainMenu/Vortex.png" type="Texture" id=5]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -678, -387 )
+script = ExtResource( 2 )
+PlayButtonPath = NodePath("Logo/Play")
+SettingButtonPath = NodePath("VBoxContainer/Button2")
+QuitButtonPath = NodePath("VBoxContainer/Button3")
+vortexPath = NodePath("Logo/Vortex")
+singularityPath = NodePath("Singularity")
+allAnimatedObjectPath = [ NodePath("Logo/Title"), NodePath("Logo/Play"), NodePath("VBoxContainer/Button3"), NodePath("VBoxContainer/Button2") ]
+
+[node name="BackGround" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+
+[node name="Logo" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1024.0
+margin_top = -600.0
+margin_right = -1024.0
+margin_bottom = -600.0
+
+[node name="BlackHole" type="TextureRect" parent="Logo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 493.0
+margin_top = 85.0
+margin_right = 1407.5
+margin_bottom = 975.5
+rect_pivot_offset = Vector2( 684, 989 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Vortex" type="TextureRect" parent="Logo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 19.0
+margin_top = -341.0
+margin_right = 1848.0
+margin_bottom = 1440.0
+rect_pivot_offset = Vector2( 684, 989 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Title" type="TextureRect" parent="Logo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 408.0
+margin_top = -4.0
+margin_right = 1017.0
+margin_bottom = 576.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Play" type="Button" parent="Logo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 845.0
+margin_top = 504.0
+margin_right = 1079.0
+margin_bottom = 546.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "TitleButton"
+text = "PLAY"
+align = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.35
+anchor_bottom = 0.65
+margin_left = 20.0
+margin_top = -180.0
+margin_right = 254.0
+margin_bottom = -260.0
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+margin_right = 234.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quit"
+align = 0
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 234.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Settings"
+align = 0
+expand_icon = true
+
+[node name="Singularity" type="Control" parent="."]
+margin_left = 912.0
+margin_top = 518.0
+margin_right = 912.0
+margin_bottom = 518.0
