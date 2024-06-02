@@ -77,7 +77,7 @@ namespace Com.IsartDigital.ProjectName.Game
             GameHud.GetInstance().settlerLabel.Text = ResourceManager.GetInstance().settlers.ToString();
 
             GameHud.GetInstance().BlsckHoleCooldownLabel.Text = ResourceManager.GetInstance().BlackHoleCooldown.ToString();
-            GameHud.GetInstance().acctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
+            //GameHud.GetInstance().acctionLabel.Text = ResourceManager.GetInstance().acction.ToString();
         }
 
         protected override void Dispose(bool pDisposing)

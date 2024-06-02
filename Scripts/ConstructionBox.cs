@@ -8,7 +8,7 @@ namespace Com.IsartDigital.ProjectName{
 	
     public class ConstructionBox : Control
     {
-        static private ConstructionBox instance;
+        static public ConstructionBox instance;
 		
 		static public ConstructionBox GetInstance () {
 			if (instance == null) instance = new ConstructionBox();
@@ -20,12 +20,18 @@ namespace Com.IsartDigital.ProjectName{
         [Export] private NodePath IronButtonPath;
         [Export] private NodePath FoodButtonPath;
 
+        [Export] private NodePath LowPosiPath;
+        [Export] private NodePath HigPosiPath;
+
         private TextureButton EmptyButton;
         private TextureButton HouseButton;
         private TextureButton IronButton;
         private TextureButton FoodButton;
 
         private ConstructionBox ():base() {}
+
+        private Position2D LowPosi;
+        private Position2D HigPosi;
 
         public override void _Ready()
         {
@@ -41,12 +47,29 @@ namespace Com.IsartDigital.ProjectName{
             IronButton = GetNode<TextureButton>(IronButtonPath);
             FoodButton = GetNode<TextureButton>(FoodButtonPath);
 
+            LowPosi = GetNode<Position2D>(LowPosiPath);
+            HigPosi = GetNode<Position2D>(HigPosiPath);
+
             EmptyButton.Connect("pressed",this,nameof(emptyPressed));
             HouseButton.Connect("pressed",this,nameof(housePressed));
             IronButton.Connect("pressed",this,nameof(IronPressed));
             FoodButton.Connect("pressed",this,nameof(FoodPressed));
 
             
+        }
+
+        public override void _Process(float delta)
+        {
+            base._Process(delta);
+            if (Input.IsActionJustPressed("left_clic") 
+                &&(GetGlobalMousePosition().x < LowPosi.GlobalPosition.x 
+                || GetGlobalMousePosition().y < LowPosi.GlobalPosition.y
+                || GetGlobalMousePosition().x > HigPosi.GlobalPosition.x
+                || GetGlobalMousePosition().y > HigPosi.GlobalPosition.y
+                ))
+            {
+                QueueFree();
+            }
         }
 
         private void emptyPressed()
@@ -94,6 +117,8 @@ namespace Com.IsartDigital.ProjectName{
                 lcell.CreateTile(CellType.FoodSpot);
                 QueueFree();
             }
+
+            
         }
 
         protected override void Dispose(bool pDisposing)

@@ -9,7 +9,7 @@ namespace Com.IsartDigital.ProjectName {
 	public class Camera : Camera2D
 	{
 		Vector2 screenSize;
-        private float speed = 100f;
+        [Export] private float speed = 150f;
         float cameraMoveThreshold = 0.4f;
 
         public override void _Ready()

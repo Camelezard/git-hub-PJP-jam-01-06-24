@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Textures/Graphic/Sprite/BlackHoleVortex.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Vortex.cs" type="Script" id=2]
+
+[node name="Vortex" type="Node2D"]
+script = ExtResource( 2 )
+speed = 20.0
+
+[node name="BlackHoleVortex" type="Sprite" parent="."]
+position = Vector2( 1, 0 )
+scale = Vector2( 2.17713, 2.17713 )
+texture = ExtResource( 1 )
