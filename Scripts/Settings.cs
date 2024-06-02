@@ -17,12 +17,21 @@ public class Settings : Control
     private HSlider musicSlider;
     private HSlider soundSlider;
 
+    // BUTTONS
+    [Export] private NodePath quitButtonPath;
+    private Button quitButton;
+
+
+    // INIT ANIMATION
+    private Tween animation = new Tween();
+
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // INITIALIZATION
 
     public override void _Ready()
     {
         SetNodes();
         ConnectSignals();
+        InitAnimation();
     }
 
     private void SetNodes()
@@ -30,6 +39,8 @@ public class Settings : Control
         masterSlider = (HSlider)GetNode(matserSliderPath);
         musicSlider = (HSlider)GetNode(musicSliderPath);
         soundSlider = (HSlider)GetNode(soundSliderPath);
+        quitButton = (Button)GetNode(quitButtonPath);
+        AddChild(animation);
     }
 
     private void ConnectSignals()
@@ -37,6 +48,7 @@ public class Settings : Control
         masterSlider.Connect(SIGNAL_VALUE_CHANGED, this, nameof(SetVolumeMaster));
         musicSlider.Connect(SIGNAL_VALUE_CHANGED, this, nameof(SetVolumeMusic));
         soundSlider.Connect(SIGNAL_VALUE_CHANGED, this, nameof(SetVolumeSound));
+        quitButton.Connect("button_down", this, nameof(QuitAnimation));
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // VOLUMES
@@ -56,6 +68,99 @@ public class Settings : Control
 
     private void SetVolumeSound(float pValue)
     {
-        SetVolume(SoundManager.Bus.SoundEffect, pValue);
+        SetVolume(SoundManager.Bus.SoundEffects, pValue);
+        SoundManager.GetInstance().Play(SoundManager.SoundType.WATER);
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // QUIT
+
+    private void QuitPressed()
+    {
+        QueueFree();
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // ANIMATNIOS
+
+    private void InitAnimation()
+    {
+        RectPivotOffset = RectSize * .5f;
+
+        animation.InterpolateProperty
+            (
+                this,
+                "modulate",
+                new Color(0, 0, 0, 0),
+                Colors.White,
+                1.5f
+            );
+
+        animation.InterpolateProperty
+            (
+                this,
+                "rect_rotation",
+                45 - 90f * GD.Randf(),
+                0,
+                1.5f,
+                Tween.TransitionType.Expo,
+                Tween.EaseType.Out
+            );
+
+        animation.InterpolateProperty
+            (
+                this,
+                "rect_position",
+                RectPosition + Vector2.Up * 100f,
+                RectPosition,
+                1.5f,
+                Tween.TransitionType.Expo,
+                Tween.EaseType.Out
+            );
+
+        Modulate = new Color(0, 0, 0, 0);
+
+        animation.Start();
+    }
+
+    private void QuitAnimation()
+    {
+        SoundManager.GetInstance().Play(SoundManager.SoundType.BUTTON_CLICK);
+        RectPivotOffset = RectSize * .5f;
+
+        animation.InterpolateProperty
+            (
+                this,
+                "modulate",
+                Colors.White,
+                new Color(0, 0, 0, 0),
+                1.5f
+            );
+
+        animation.InterpolateProperty
+            (
+                this,
+                "rect_rotation",
+                0,
+                45 - 90f * GD.Randf(),
+                1.5f,
+                Tween.TransitionType.Expo,
+                Tween.EaseType.In
+            );
+
+        animation.InterpolateProperty
+            (
+                this,
+                "rect_position",
+                RectPosition,
+                RectPosition + Vector2.Up * 100f,
+                1.5f,
+                Tween.TransitionType.Expo,
+                Tween.EaseType.In
+            );
+
+        Modulate = new Color(0, 0, 0, 0);
+
+        animation.InterpolateCallback(this, 1.5f, nameof(QuitPressed));
+
+        animation.Start();
     }
 }

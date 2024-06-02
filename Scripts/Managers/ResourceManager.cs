@@ -24,6 +24,9 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] public int initialBlackholeradius = 3;
         public int Blackholeradius;
 
+        public static int settlerDead = 0;
+        public static int settlerSaved = 0;
+
         public int iron { get; set; }
         public int food { get; set; }
 
@@ -166,6 +169,8 @@ namespace Com.IsartDigital.ProjectName.Game
             GD.Print("IronLeft = " + iron);
             GD.Print("FoodLeft = " + food);
 
+            SoundManager.GetInstance().Play(SoundManager.SoundType.PLACE_TILE);
+
             Ui_Manager.GetInstance().UpdateHud();
         }
 
@@ -175,6 +180,7 @@ namespace Com.IsartDigital.ProjectName.Game
             UseAcction();
 
             Ui_Manager.GetInstance().UpdateHud();
+            SoundManager.GetInstance().Play(SoundManager.SoundType.PLACE_TILE);
         }
 
         public void ColectFood()
@@ -183,6 +189,7 @@ namespace Com.IsartDigital.ProjectName.Game
             UseAcction();
 
             Ui_Manager.GetInstance().UpdateHud();
+            SoundManager.GetInstance().Play(SoundManager.SoundType.WATER);
         }
 
         public void CraftAtile()
