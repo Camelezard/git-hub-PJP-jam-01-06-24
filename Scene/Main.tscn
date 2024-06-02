@@ -35,8 +35,7 @@ HelpButtonPath = NodePath("Help")
 sceneHelpBox = ExtResource( 7 )
 
 [node name="Control" parent="UI" instance=ExtResource( 8 )]
-visible = false
-margin_bottom = -464.0
+margin_bottom = -727.0
 
 [node name="Help" type="Button" parent="UI"]
 visible = false
@@ -49,6 +48,13 @@ margin_bottom = -5.0
 text = "?"
 
 [node name="MainMenu2" parent="UI" instance=ExtResource( 10 )]
+
+[node name="Button3" parent="UI/MainMenu2/VBoxContainer" index="0"]
+margin_bottom = 78.0
+
+[node name="Button2" parent="UI/MainMenu2/VBoxContainer" index="1"]
+margin_top = 82.0
+margin_bottom = 160.0
 
 [node name="MainMenu" parent="UI" instance=ExtResource( 9 )]
 visible = false
@@ -67,6 +73,8 @@ motion_mirroring = Vector2( 2000, 2000 )
 position = Vector2( 488, -175 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
+
+[node name="SetlerFactory" type="Node2D" parent="."]
 
 [editable path="UI/MainMenu2"]
 [editable path="UI/MainMenu"]
