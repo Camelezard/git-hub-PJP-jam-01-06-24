@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Settings.cs" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.298039 )
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+matserSliderPath = NodePath("BackGround/LeftContainer/MasterSlider")
+musicSliderPath = NodePath("BackGround/LeftContainer/MusicSlider")
+soundSliderPath = NodePath("BackGround/LeftContainer/SoundEffectSlider")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackGround" type="Panel" parent="."]
+anchor_left = 0.15
+anchor_right = 0.85
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Settings" type="Label" parent="BackGround"]
+anchor_right = 1.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 51.5, 1.5 )
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="LeftContainer" type="VBoxContainer" parent="BackGround"]
+anchor_left = 0.05
+anchor_right = 0.45
+anchor_bottom = 1.0
+margin_top = 60.0
+
+[node name="Audio" type="Label" parent="BackGround/LeftContainer"]
+margin_right = 342.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 51.5, 1.5 )
+text = "Audio"
+align = 1
+valign = 1
+
+[node name="Master" type="Label" parent="BackGround/LeftContainer"]
+margin_top = 23.0
+margin_right = 342.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 51.5, 1.5 )
+text = "Master"
+align = 1
+valign = 1
+
+[node name="MasterSlider" type="HSlider" parent="BackGround/LeftContainer"]
+margin_top = 46.0
+margin_right = 342.0
+margin_bottom = 62.0
+min_value = -80.0
+max_value = 6.0
+
+[node name="Music" type="Label" parent="BackGround/LeftContainer"]
+margin_top = 66.0
+margin_right = 342.0
+margin_bottom = 85.0
+rect_pivot_offset = Vector2( 51.5, 1.5 )
+text = "Music"
+align = 1
+valign = 1
+
+[node name="MusicSlider" type="HSlider" parent="BackGround/LeftContainer"]
+margin_top = 89.0
+margin_right = 342.0
+margin_bottom = 105.0
+min_value = -80.0
+max_value = 6.0
+
+[node name="SoundEffect" type="Label" parent="BackGround/LeftContainer"]
+margin_top = 109.0
+margin_right = 342.0
+margin_bottom = 128.0
+rect_pivot_offset = Vector2( 51.5, 1.5 )
+text = "Sound Effect"
+align = 1
+valign = 1
+
+[node name="SoundEffectSlider" type="HSlider" parent="BackGround/LeftContainer"]
+margin_top = 132.0
+margin_right = 342.0
+margin_bottom = 148.0
+min_value = -80.0
+max_value = 6.0
+
+[node name="RightContainer" type="VBoxContainer" parent="BackGround"]
+anchor_left = 0.55
+anchor_right = 0.95
+anchor_bottom = 1.0
+margin_top = 60.0

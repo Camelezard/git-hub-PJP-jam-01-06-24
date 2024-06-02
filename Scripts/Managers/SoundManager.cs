@@ -19,8 +19,9 @@ public class SoundManager : Node2D
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // VARIABLES
 
     // BUS
-    private enum Bus
+    public enum Bus
     {
+        Master = 0,
         Music = 1,
         SoundEffect = 2
     }

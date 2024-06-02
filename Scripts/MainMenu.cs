@@ -25,21 +25,26 @@ namespace Com.IsartDigital.ProjectName {
         // ANIMATIONS
         // Settings
         private const string PROPERTY_RECT_SCALE = "rect_scale";
-        private const string PROPERTY_RECT_POSITION = "rect_position";
+        private const string PROPERTY_RECT_GLOBAL_POSITION = "rect_global_position";
         private const string PROPERTY_RECT_ROTATION = "rect_rotation";
         private const float ANIMATION_DELAY_MAX = .5f;
         private const float ANIMATION_DURATION = 1.25f;
-        private const float ANIMATION_VORTEX_END_ROTATION = 720f;
-
+        private const float ANIMATION_VORTEX_END_ROTATION = -720f;
+        private const float ANIMATION_BLACK_HOLE_DURATION = 2f;
+        private const float ANIMATION_BLACK_HOLE_END_SCALE = 1.05f;
+        private const float ANIMATION_BLACK_HOLE_END_SCALE_B = 5f;
 
         // Properties
         [Export] private NodePath vortexPath;
+        [Export] private NodePath blackHolePath;
         [Export] private NodePath singularityPath;
         [Export] private List<NodePath> allAnimatedObjectPath;
         private List<Control> allAnimatedObject = new List<Control>();
-        private Control singularity;
         private Control vortex;
+        private Control blackHole;
+        private Control singularity;
         private Tween animation = new Tween();
+        private Tween blackHoleAnimation = new Tween();
 
 
         static public MainMenu GetInstance()
@@ -84,30 +89,85 @@ namespace Com.IsartDigital.ProjectName {
         {
             GD.Randomize();
             AddChild(animation);
+            AddChild(blackHoleAnimation);
             singularity = (Control)GetNode(singularityPath);
+            blackHole = (Control)GetNode(blackHolePath);
             vortex = (Control)GetNode(vortexPath);
             vortex.RectPivotOffset = vortex.RectSize * .5f;
+            blackHole.RectPivotOffset = blackHole.RectSize * .5f;
             foreach (NodePath lCurrentObjectPath in allAnimatedObjectPath)
                 allAnimatedObject.Add((Control)GetNode(lCurrentObjectPath));
+
+            AnimationBlackHole();
+        }
+
+        private void AnimationBlackHole()
+        {
+            blackHoleAnimation.InterpolateProperty
+                (
+                blackHole,
+                PROPERTY_RECT_SCALE,
+                blackHole.RectScale,
+                blackHole.RectScale * ANIMATION_BLACK_HOLE_END_SCALE,
+                ANIMATION_BLACK_HOLE_DURATION * .5f,
+                Tween.TransitionType.Back,
+                Tween.EaseType.InOut
+                );
+            blackHoleAnimation.InterpolateProperty
+                (
+                blackHole,
+                PROPERTY_RECT_SCALE,
+                blackHole.RectScale * ANIMATION_BLACK_HOLE_END_SCALE,
+                blackHole.RectScale,
+                ANIMATION_BLACK_HOLE_DURATION * .5f,
+                Tween.TransitionType.Back,
+                Tween.EaseType.InOut,
+                delay: ANIMATION_BLACK_HOLE_DURATION * .5f
+                );
+
+            blackHoleAnimation.InterpolateProperty
+                (
+                vortex,
+                PROPERTY_RECT_ROTATION,
+                0,
+                ANIMATION_VORTEX_END_ROTATION * .5f,
+                ANIMATION_BLACK_HOLE_DURATION
+                );
+
+            blackHoleAnimation.InterpolateCallback(this, ANIMATION_BLACK_HOLE_DURATION, nameof(AnimationBlackHole));
+            blackHoleAnimation.Start();
         }
 
         private void AnimationPlayButton()
         {
-            Vector2 lSingularity = singularity.RectPosition;
 
             foreach (Control lCurrentObject in allAnimatedObject)
-                AnimationToBlackHole(lCurrentObject, lSingularity);
+                AnimationToBlackHole(lCurrentObject);
+
+            blackHoleAnimation.QueueFree();
 
             animation.InterpolateProperty
                 (
                     vortex,
                     PROPERTY_RECT_ROTATION,
                     vortex.RectRotation,
-                    ANIMATION_VORTEX_END_ROTATION,
+                    vortex.RectRotation + ANIMATION_VORTEX_END_ROTATION,
                     ANIMATION_DURATION + ANIMATION_DELAY_MAX,
-                    Tween.TransitionType.Elastic,
-                    Tween.EaseType.InOut
+                    Tween.TransitionType.Sine,
+                    Tween.EaseType.Out
                 );
+
+            animation.InterpolateProperty
+               (
+                   blackHole,
+                   PROPERTY_RECT_SCALE,
+                   blackHole.RectScale,
+                   blackHole.RectScale * ANIMATION_BLACK_HOLE_END_SCALE_B,
+                   ANIMATION_DURATION,
+                   Tween.TransitionType.Sine,
+                   Tween.EaseType.InOut,
+                   delay: ANIMATION_DELAY_MAX
+               );
 
             animation.Start();
 
@@ -116,17 +176,18 @@ namespace Com.IsartDigital.ProjectName {
             SoundManager.GetInstance().Play(SoundManager.MusicType.IN_GAME, SoundManager.TRANSITION_NORMAL_DURATION);
         }
 
-        private void AnimationToBlackHole(Control lObject, Vector2 lSingularity)
+        private void AnimationToBlackHole(Control pObject)
         {
+
             float lCurrentDuration = ANIMATION_DURATION - ANIMATION_DELAY_MAX * GD.Randf();
-            float lCurrentDelay =ANIMATION_DELAY_MAX * GD.Randf();
+            float lCurrentDelay = ANIMATION_DELAY_MAX * GD.Randf();
 
             animation.InterpolateProperty
                 (
-                lObject,
-                PROPERTY_RECT_POSITION,
-                lObject.RectPosition,
-                lSingularity,
+                pObject,
+                PROPERTY_RECT_GLOBAL_POSITION,
+                pObject.RectGlobalPosition,
+                singularity.RectGlobalPosition - pObject.RectPivotOffset,
                 lCurrentDuration,
                 Tween.TransitionType.Expo,
                 Tween.EaseType.In,
@@ -135,12 +196,24 @@ namespace Com.IsartDigital.ProjectName {
 
             animation.InterpolateProperty
                 (
-                lObject,
+                pObject,
                 PROPERTY_RECT_SCALE,
-                lObject.RectScale,
+                pObject.RectScale,
                 Vector2.Zero,
                 lCurrentDuration,
                 Tween.TransitionType.Back,
+                Tween.EaseType.In,
+                delay: lCurrentDelay
+                );
+
+            animation.InterpolateProperty
+                (
+                pObject,
+                PROPERTY_RECT_ROTATION,
+                pObject.RectRotation,
+                360f - 720f * GD.Randf(),
+                lCurrentDuration,
+                Tween.TransitionType.Expo,
                 Tween.EaseType.In,
                 delay: lCurrentDelay
                 );
