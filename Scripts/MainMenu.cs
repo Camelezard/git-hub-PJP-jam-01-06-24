@@ -24,6 +24,7 @@ namespace Com.IsartDigital.ProjectName {
 
         // ANIMATIONS
         // Settings
+        private const string PROPERTY_MODULATE = "modulate";
         private const string PROPERTY_RECT_SCALE = "rect_scale";
         private const string PROPERTY_RECT_GLOBAL_POSITION = "rect_global_position";
         private const string PROPERTY_RECT_ROTATION = "rect_rotation";
@@ -33,6 +34,7 @@ namespace Com.IsartDigital.ProjectName {
         private const float ANIMATION_BLACK_HOLE_DURATION = 2f;
         private const float ANIMATION_BLACK_HOLE_END_SCALE = 1.05f;
         private const float ANIMATION_BLACK_HOLE_END_SCALE_B = 5f;
+        private const float ANIMATION_HIDE_DURATION = 1f;
 
         // Properties
         [Export] private NodePath vortexPath;
@@ -62,6 +64,8 @@ namespace Com.IsartDigital.ProjectName {
             playButton.Connect("pressed", this, nameof(AnimationPlayButton));
             settingButton.Connect("pressed", this, nameof(SettingPressed));
             quitButton.Connect("pressed", this, nameof(QuitPressed));
+            settingButton.Connect("pressed", this, nameof(PlayClick));
+            quitButton.Connect("pressed", this, nameof(PlayClick));
 
             SetAnimationProperties();
         }
@@ -70,8 +74,9 @@ namespace Com.IsartDigital.ProjectName {
         private void PlayPressed()
         {
             Main.instance.startLevelOne();
-            Hide();
         }
+
+        private void HideAll() => Hide();
 
         private void SettingPressed()
         {
@@ -83,8 +88,13 @@ namespace Com.IsartDigital.ProjectName {
             GetTree().Quit();
         }
 
+        // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Sounds
+
+        private void PlayClick() => SoundManager.GetInstance().Play(SoundManager.SoundType.BUTTON_CLICK);
+
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // ANIMATIONS
 
+        // PLAY
         private void SetAnimationProperties()
         {
             GD.Randomize();
@@ -141,6 +151,8 @@ namespace Com.IsartDigital.ProjectName {
         private void AnimationPlayButton()
         {
 
+            SoundManager.GetInstance().Play(SoundManager.SoundType.BLACKHOLE_ASPIRATION);
+
             foreach (Control lCurrentObject in allAnimatedObject)
                 AnimationToBlackHole(lCurrentObject);
 
@@ -169,11 +181,23 @@ namespace Com.IsartDigital.ProjectName {
                    delay: ANIMATION_DELAY_MAX
                );
 
-            animation.Start();
-
             animation.InterpolateCallback(this, ANIMATION_DURATION + ANIMATION_DELAY_MAX, nameof(PlayPressed));
 
-            SoundManager.GetInstance().Play(SoundManager.MusicType.IN_GAME, SoundManager.TRANSITION_NORMAL_DURATION);
+            animation.InterpolateProperty
+                (
+                this,
+                PROPERTY_MODULATE,
+                Modulate,
+                new Color(Modulate, 0f),
+                ANIMATION_HIDE_DURATION,
+                delay: ANIMATION_DURATION
+                );
+
+            animation.InterpolateCallback(this, ANIMATION_DURATION + ANIMATION_DELAY_MAX + ANIMATION_HIDE_DURATION, nameof(HideAll));
+
+            animation.Start();
+
+            SoundManager.GetInstance().Play(SoundManager.MusicType.IN_GAME, SoundManager.TRANSITION_SHORT_DURATION);
         }
 
         private void AnimationToBlackHole(Control pObject)
@@ -218,5 +242,5 @@ namespace Com.IsartDigital.ProjectName {
                 delay: lCurrentDelay
                 );
         }
-	}
+    }
 }

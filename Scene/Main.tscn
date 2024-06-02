@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=1]
 [ext_resource path="res://Scene/SoundManager.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/Managers/Ui_Manager.cs" type="Script" id=6]
 [ext_resource path="res://Scene/Ui/Help.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scene/Ui/GameHud.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scene/Ui/MainMenu.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scene/Ui/TItleCard.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node2D"]
@@ -28,9 +27,9 @@ initialBlackholeCooldown = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
-PlayButtonPath = NodePath("MainMenu2/Logo/Play")
-SetingButtonPath = NodePath("MainMenu2/VBoxContainer/Button2")
-QuitButtonPath = NodePath("MainMenu2/VBoxContainer/Button3")
+PlayButtonPath = NodePath("MainMenu/Logo/Play")
+SetingButtonPath = NodePath("MainMenu/VBoxContainer/Button2")
+QuitButtonPath = NodePath("MainMenu/VBoxContainer/Button3")
 HelpButtonPath = NodePath("Help")
 sceneHelpBox = ExtResource( 7 )
 
@@ -38,31 +37,16 @@ sceneHelpBox = ExtResource( 7 )
 margin_bottom = -727.0
 
 [node name="Help" type="Button" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1001.0
-margin_top = 575.0
+margin_left = 1081.0
+margin_top = 659.0
 margin_right = -5.0
 margin_bottom = -5.0
 text = "?"
+expand_icon = true
 
-[node name="MainMenu2" parent="UI" instance=ExtResource( 10 )]
-
-[node name="Button3" parent="UI/MainMenu2/VBoxContainer" index="0"]
-margin_bottom = 78.0
-
-[node name="Button2" parent="UI/MainMenu2/VBoxContainer" index="1"]
-margin_top = 82.0
-margin_bottom = 160.0
-
-[node name="MainMenu" parent="UI" instance=ExtResource( 9 )]
-visible = false
-margin_left = 1.0
-margin_top = -2.0
-margin_right = 1.0
-margin_bottom = -2.0
-script = null
+[node name="MainMenu" parent="UI" instance=ExtResource( 10 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -76,5 +60,4 @@ texture = ExtResource( 3 )
 
 [node name="SetlerFactory" type="Node2D" parent="."]
 
-[editable path="UI/MainMenu2"]
 [editable path="UI/MainMenu"]

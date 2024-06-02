@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Managers/SoundManager.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Musics/MainMenu.wav" type="AudioStream" id=2]
-[ext_resource path="res://Assets/Sounds/OpenMap.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Sounds/TechnoOpened.wav" type="AudioStream" id=4]
-[ext_resource path="res://Assets/Musics/InGame.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Sounds/tou_noire-001.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sounds/clic.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/deplacement.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Sounds/EMBIANTE-002.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Sounds/water-001.wav" type="AudioStream" id=7]
 
 [node name="SoundManager" type="Node2D"]
 script = ExtResource( 1 )
-allSounds = [ ExtResource( 3 ), ExtResource( 4 ) ]
-allMusics = [ ExtResource( 2 ), ExtResource( 5 ) ]
+allSounds = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ) ]
+allMusics = [ ExtResource( 2 ), ExtResource( 6 ) ]

@@ -30,8 +30,9 @@ public class SoundManager : Node2D
     public enum SoundType
     {
         BUTTON_CLICK,
+        BLACKHOLE_ASPIRATION,
         PLACE_TILE,
-        BLACKHOLE_ASPIRATION
+        WATER,
 
     }
     public enum MusicType
@@ -60,7 +61,7 @@ public class SoundManager : Node2D
     // TRANSITIONS
     public const float TRANSITION_LONG_DURATION = 10f;
     public const float TRANSITION_NORMAL_DURATION = 5f;
-    public const float TRANSITION_SMALL_DURATION = 2.5f;
+    public const float TRANSITION_SHORT_DURATION = 2.5f;
     private const float TRANSITION_DEFAULT_DURATION = 0f;
     private Tween transitionTween = new Tween();
 
@@ -149,6 +150,7 @@ public class SoundManager : Node2D
         AudioStreamPlayer lOldPlayer = musicPlayers[currentMusicPlayerIndex];
         currentMusicPlayerIndex = (int)(++currentMusicPlayerIndex % musicPlayers.Count);
         // Get The Music
+
         AudioStreamPlayer lNewPlayer = Play(allMusics[(int)pType], true, musicPlayers[currentMusicPlayerIndex]);
         // Play Transition
         transitionTween.InterpolateProperty(lOldPlayer, PROPERTY_VOLUME_DB, lOldPlayer.VolumeDb, VOLUME_DB_MIN, pTransitionDuration);
