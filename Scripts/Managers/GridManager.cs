@@ -24,7 +24,7 @@ namespace Com.IsartDigital.CCM.Managers
 
         private Vector2 tilemapSize = new Vector2();
 
-        
+        [Export] PackedScene UpgradParticleFactory;
 
         [Export(PropertyHint.Range, "2,100")]
         public float Cell_size
@@ -295,9 +295,18 @@ namespace Com.IsartDigital.CCM.Managers
                     break;
                 case CellType.IronSpot:
                     ResourceManager.GetInstance().ColectIron();
+                    ugradeResource lupg = (ugradeResource)UpgradParticleFactory.Instance();
+                    lupg.GlobalPosition = lCel.GlobalPosition;
+                    lupg.cellType = ugradeResource.enumaterial.food;
+                    AddChild(lupg);
+
                     break;
                 case CellType.FoodSpot:
                     ResourceManager.GetInstance().ColectFood();
+                    lupg = (ugradeResource)UpgradParticleFactory.Instance();
+                    lupg.GlobalPosition = lCel.GlobalPosition;
+                    lupg.cellType = ugradeResource.enumaterial.iron;
+                    AddChild(lupg);
                     break;
                 default:
                     break;

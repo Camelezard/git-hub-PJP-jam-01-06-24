@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Cell.cs" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scene/Ui/ConstructBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scene/Settler.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scene/HomeArea.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scene/ugradeResource.tscn" type="PackedScene" id=11]
 
 [node name="Cell" type="Node2D"]
 script = ExtResource( 2 )
@@ -19,6 +20,7 @@ CellTexturList = [ null, ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), E
 ConstructorBoxFactory = ExtResource( 8 )
 settlersFactory = ExtResource( 9 )
 HomeAreaFactory = ExtResource( 10 )
+UpgradParticleFactory = ExtResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

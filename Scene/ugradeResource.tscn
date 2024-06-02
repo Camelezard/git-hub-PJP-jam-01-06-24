@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Textures/UI/Iron.png" type="Texture" id=1]
+[ext_resource path="res://Scene/ugradeResource.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Textures/UI/Fish.png" type="Texture" id=3]
 
 [node name="ugradeResource" type="Node2D"]
+script = ExtResource( 2 )
+FoodTextur = ExtResource( 3 )
+ronTextur = ExtResource( 1 )
+iconPath = NodePath("HBoxContainer/TextureRect")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 40.0

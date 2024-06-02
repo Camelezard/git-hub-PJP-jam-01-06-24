@@ -76,6 +76,7 @@ namespace Com.IsartDigital.ProjectName.Game
 
         [Export] PackedScene HomeAreaFactory;
 
+
         public int settlersin;
         public Label lLabel;
 
