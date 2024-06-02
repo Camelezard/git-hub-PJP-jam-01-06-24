@@ -24,10 +24,10 @@ script = ExtResource( 5 )
 pathTextRect = NodePath("MarginContainer/TextureRect")
 
 [node name="MarginContainer" type="MarginContainer" parent="Help"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 629.0
-margin_bottom = 427.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 611.0
+margin_bottom = 409.0
 mouse_filter = 2
 custom_constants/margin_right = 30
 custom_constants/margin_top = 30
@@ -37,8 +37,8 @@ custom_constants/margin_bottom = 30
 [node name="TextureRect" type="TextureRect" parent="Help/MarginContainer"]
 margin_left = 30.0
 margin_top = 30.0
-margin_right = 592.0
-margin_bottom = 390.0
+margin_right = 556.0
+margin_bottom = 354.0
 mouse_filter = 2
 expand = true
 stretch_mode = 6

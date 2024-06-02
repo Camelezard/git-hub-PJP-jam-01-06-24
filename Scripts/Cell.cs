@@ -59,7 +59,7 @@ namespace Com.IsartDigital.ProjectName.Game
     }
     public class Cell : Node2D
     {
-        public enum CellType { Void, Empty, House, IronSpot, FoodSpot, BlackHole}
+        public enum CellType { Void, Empty, House, IronSpot, FoodSpot, BlackHole }
         public CellType cellType = CellType.Empty;
         public Coordinates gridCoordinates;
 
@@ -68,6 +68,8 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] private NodePath CellSpritePath;
 
         [Export] private List<Texture> CellTexturList = new List<Texture>();
+
+        [Export] private PackedScene ConstructorBoxFactory;
 
         public override void _Ready()
         {
@@ -78,6 +80,23 @@ namespace Com.IsartDigital.ProjectName.Game
         public void AdoptTheCellTexture()
         {
             CellSprite.Texture = CellTexturList[(int)cellType];
+
+            if (cellType == CellType.House)CellSprite.Offset = new Vector2(0, -15);
+            else if (cellType == CellType.IronSpot) CellSprite.Offset = new Vector2(0, -1);
+            else CellSprite.Offset = Vector2.Zero;
+        }
+
+        public void creatConstructorBox()
+        {
+            Control lConstructorBox = (Control)ConstructorBoxFactory.Instance();
+            AddChild(lConstructorBox);
+        }
+
+        public void CreateTile(CellType pcellType = CellType.Empty)
+        {
+            cellType = pcellType;
+            
+            AdoptTheCellTexture();
         }
     }
 }

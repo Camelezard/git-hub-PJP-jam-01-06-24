@@ -1,20 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/GameHud.cs" type="Script" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
+ironLabelPath = NodePath("TopUi/MarginContainer/TopHBox/RightTop/settlers/iron")
+foodLabelPath = NodePath("TopUi/MarginContainer/TopHBox/RightTop/Acction left/Food")
+acctionLabelPath = NodePath("TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne/acction")
+settlerLabelPath = NodePath("TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne2/sttelrer")
+BlsckHoleCooldownLabelPath = NodePath("TopUi/MarginContainer/TopHBox/LeftTop/FoodContainer/BH cld")
 
 [node name="TopUi" type="PanelContainer" parent="."]
 anchor_right = 1.0
 margin_bottom = 28.0
 
 [node name="MarginContainer" type="MarginContainer" parent="TopUi"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 91.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 999.0
+margin_bottom = 109.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 10
 custom_constants/margin_left = 20
@@ -23,17 +30,18 @@ custom_constants/margin_bottom = 10
 [node name="TopHBox" type="HBoxContainer" parent="TopUi/MarginContainer"]
 margin_left = 20.0
 margin_top = 10.0
-margin_right = 990.0
+margin_right = 954.0
 margin_bottom = 74.0
 
 [node name="LeftTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
-margin_right = 240.0
+margin_right = 231.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="IronContainer" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
-margin_right = 76.0
+visible = false
+margin_right = 80.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 22, 18 )
 
@@ -45,21 +53,20 @@ stretch_mode = 5
 
 [node name="Iron" type="Label" parent="TopUi/MarginContainer/TopHBox/LeftTop/IronContainer"]
 margin_left = 68.0
-margin_top = 25.0
-margin_right = 76.0
-margin_bottom = 39.0
+margin_top = 22.0
+margin_right = 80.0
+margin_bottom = 41.0
 text = "0"
 align = 1
 valign = 1
 
 [node name="Control" type="VSeparator" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
-margin_left = 80.0
-margin_right = 84.0
+margin_right = 10.0
 margin_bottom = 64.0
 
 [node name="FoodContainer" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/LeftTop"]
-margin_left = 88.0
-margin_right = 164.0
+margin_left = 14.0
+margin_right = 94.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 22, 18 )
 
@@ -69,18 +76,18 @@ margin_bottom = 64.0
 texture = ExtResource( 1 )
 stretch_mode = 5
 
-[node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/LeftTop/FoodContainer"]
+[node name="BH cld" type="Label" parent="TopUi/MarginContainer/TopHBox/LeftTop/FoodContainer"]
 margin_left = 68.0
-margin_top = 25.0
-margin_right = 76.0
-margin_bottom = 39.0
+margin_top = 22.0
+margin_right = 80.0
+margin_bottom = 41.0
 text = "0"
 align = 1
 valign = 1
 
 [node name="CenterTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
-margin_left = 244.0
-margin_right = 725.0
+margin_left = 235.0
+margin_right = 698.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -88,81 +95,109 @@ size_flags_stretch_ratio = 2.0
 alignment = 1
 
 [node name="Black Hole turne" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/CenterTop"]
-margin_left = 202.0
-margin_right = 278.0
+margin_left = 142.0
+margin_right = 236.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 22, 18 )
 size_flags_stretch_ratio = 3.0
 alignment = 1
 
-[node name="Iron" type="Label" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
-margin_top = 25.0
-margin_right = 8.0
-margin_bottom = 39.0
+[node name="acction" type="Label" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
 text = "0"
 align = 1
 valign = 1
 
 [node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
-margin_left = 12.0
-margin_right = 76.0
+margin_left = 16.0
+margin_right = 80.0
+margin_bottom = 64.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Control" type="VSeparator" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne"]
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 64.0
+
+[node name="Black Hole turne2" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/CenterTop"]
+margin_left = 240.0
+margin_right = 320.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 22, 18 )
+size_flags_stretch_ratio = 3.0
+alignment = 1
+
+[node name="sttelrer" type="Label" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne2"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/CenterTop/Black Hole turne2"]
+margin_left = 16.0
+margin_right = 80.0
 margin_bottom = 64.0
 texture = ExtResource( 1 )
 stretch_mode = 5
 
 [node name="RightTop" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox"]
-margin_left = 729.0
-margin_right = 970.0
+margin_left = 702.0
+margin_right = 934.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="Acction left" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/RightTop"]
-margin_left = 77.0
-margin_right = 153.0
+margin_left = 54.0
+margin_right = 134.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 22, 18 )
 alignment = 2
 
 [node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/RightTop/Acction left"]
-margin_top = 25.0
-margin_right = 8.0
-margin_bottom = 39.0
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
 text = "0"
 align = 1
 valign = 1
 
 [node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/RightTop/Acction left"]
-margin_left = 12.0
-margin_right = 76.0
+margin_left = 16.0
+margin_right = 80.0
 margin_bottom = 64.0
 texture = ExtResource( 1 )
 stretch_mode = 5
 
 [node name="Control" type="VSeparator" parent="TopUi/MarginContainer/TopHBox/RightTop"]
-margin_left = 157.0
-margin_right = 161.0
+margin_left = 138.0
+margin_right = 148.0
 margin_bottom = 64.0
 
 [node name="settlers" type="HBoxContainer" parent="TopUi/MarginContainer/TopHBox/RightTop"]
-margin_left = 165.0
-margin_right = 241.0
+margin_left = 152.0
+margin_right = 232.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 22, 18 )
 alignment = 2
 
-[node name="Food" type="Label" parent="TopUi/MarginContainer/TopHBox/RightTop/settlers"]
-margin_top = 25.0
-margin_right = 8.0
-margin_bottom = 39.0
+[node name="iron" type="Label" parent="TopUi/MarginContainer/TopHBox/RightTop/settlers"]
+margin_top = 22.0
+margin_right = 12.0
+margin_bottom = 41.0
 text = "0"
 align = 1
 valign = 1
 
 [node name="Icon" type="TextureRect" parent="TopUi/MarginContainer/TopHBox/RightTop/settlers"]
-margin_left = 12.0
-margin_right = 76.0
+margin_left = 16.0
+margin_right = 80.0
 margin_bottom = 64.0
 texture = ExtResource( 1 )
 stretch_mode = 5

@@ -125,17 +125,14 @@ namespace Com.IsartDigital.CCM.Managers
 
         private void initialisateTheLevelOne()
        {
-           List<string> lMap = new List<string>
+            List<string> lMap = new List<string>
            {
-               "              ",
-               "              ",
-               "     XXXXX    ",
-               "     XBXXI    ",
-               "     XXIXX    ",
-               "     XX XH    ",
-               "     XFXIX    ",
-               "              ",
-               "              "
+               "            ",
+               "XXXXX       ",
+               "XBXXI       ",
+               "XXIXX       ",
+               "XX XH       ",
+               "XFXIX       "
            };
 
             string line = lMap[0];
@@ -182,10 +179,12 @@ namespace Com.IsartDigital.CCM.Managers
                         grid[x, y].CellSprite.Offset = new Vector2(0, -15);
                     }
                     else if (lCellType == CellType.IronSpot) grid[x, y].CellSprite.Offset = new Vector2(0, -1);
-                }
+                    else grid[x, y].CellSprite.Offset = Vector2.Zero;
+               }
            }
 
             tilemapSize = new Vector2(line.Length, lMap.Count);
+            GD.Print(tilemapSize);
         }
 
         private void checkNumberOfHouseInTheWorld()
@@ -211,21 +210,34 @@ namespace Com.IsartDigital.CCM.Managers
         private void checkTheTileSelected()
         {
             Coordinates corodoneeOfTheTile = new Coordinates( VectorToGrid(GetGlobalMousePosition()).x, VectorToGrid(GetGlobalMousePosition()).y);
-            Cell lCel = grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y];
+            Cell lCel = grid[1,1];
+
+            if (corodoneeOfTheTile.x >= 0 &&
+                corodoneeOfTheTile.x < tilemapSize.x && 
+                corodoneeOfTheTile.y >= 0 &&
+                corodoneeOfTheTile.y < tilemapSize.y) lCel = grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y];
 
             //if(grid.Co)
 
             switch (lCel.cellType)
             {
                 case CellType.Void:
-                    
-                    if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
-                    grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
-                    grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
-                    grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void)
 
-                    lCel.cellType = CellType.Empty;
-                    lCel.AdoptTheCellTexture();
+                if (corodoneeOfTheTile.x >= 1
+                    && corodoneeOfTheTile.x <= tilemapSize.x-1
+                    && corodoneeOfTheTile.y >= 1
+                    && corodoneeOfTheTile.y <= tilemapSize.y-1
+                    )
+                {
+                    GD.Print(corodoneeOfTheTile.y);
+                        if (grid[corodoneeOfTheTile.x - 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                        grid[corodoneeOfTheTile.x + 1, corodoneeOfTheTile.y].cellType != CellType.Void ||
+                        grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y - 1].cellType != CellType.Void ||
+                        grid[corodoneeOfTheTile.x, corodoneeOfTheTile.y + 1].cellType != CellType.Void
+                        )
+                    lCel.creatConstructorBox();
+                }
+                    
 
                     break;
                 case CellType.Empty:

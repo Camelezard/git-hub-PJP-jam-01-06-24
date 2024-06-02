@@ -19,8 +19,10 @@ namespace Com.IsartDigital.ProjectName.Game
         [Export] public int ironGain = 3;
         [Export] public int FoodGain = 5;
 
-        [Export] public int initialBlackholeCooldown = 5;        
-        
+        [Export] public int initialBlackholeCooldown = 5;
+
+        [Export] public int initialBlackholeradius = 3;
+        public int Blackholeradius;
 
         public int iron { get; set; }
         public int food { get; set; }
@@ -88,6 +90,8 @@ namespace Com.IsartDigital.ProjectName.Game
             settlers = initailSettlers;
             BlackHoleCooldown = initialBlackholeCooldown;
 
+            Blackholeradius = initialBlackholeradius;
+
             StartTheTurn();
         }
 
@@ -127,9 +131,11 @@ namespace Com.IsartDigital.ProjectName.Game
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
+
+                    GD.Print("Empty payd");
                 }
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.IronSpot)
             {
                 IronSpot EmptyTile = new IronSpot();
             
@@ -137,19 +143,21 @@ namespace Com.IsartDigital.ProjectName.Game
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
+                    GD.Print("IronSpot payd");
                 }
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.House)
             {
-                IronSpot EmptyTile = new IronSpot();
+                House EmptyTile = new House();
             
                 if (iron >= EmptyTile.IronCost && food >= EmptyTile.FoodCost)
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
+                    GD.Print("IronSpot House");
                 }
             }
-            else if (cellType == Cell.CellType.Empty)
+            else if (cellType == Cell.CellType.FoodSpot)
             {
                 FoodSpot EmptyTile = new FoodSpot();
             
@@ -157,10 +165,13 @@ namespace Com.IsartDigital.ProjectName.Game
                 {
                     iron -= EmptyTile.IronCost;
                     food -= EmptyTile.FoodCost;
+                    GD.Print(" FoodSpot");
                 }
             }
             GD.Print("IronLeft = " + iron);
             GD.Print("FoodLeft = " + food);
+
+            Ui_Manager.GetInstance().UpdateHud();
         }
 
         public void ColectIron()
@@ -203,7 +214,8 @@ namespace Com.IsartDigital.ProjectName.Game
 
         public void BlackHoleTurn()
         {
-            GridManager.GetInstance().BlackHoleDestruction(3);
+            GridManager.GetInstance().BlackHoleDestruction(Blackholeradius);
+            Blackholeradius += initialBlackholeradius;
             BlackHoleCooldown = initialBlackholeCooldown;
         }
 

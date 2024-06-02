@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileIron.png-269266bda3da8b6c287137ec74863ebc.stex"
+path="res://.import/TIleWater.png-c6433bb5d1367a9c3a3ae48813c8d85a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot/Graphic/Sprite/TileIron.png"
-dest_files=[ "res://.import/TileIron.png-269266bda3da8b6c287137ec74863ebc.stex" ]
+source_file="res://Assets/Textures/Graphic/Sprite/TIleWater.png"
+dest_files=[ "res://.import/TIleWater.png-c6433bb5d1367a9c3a3ae48813c8d85a.stex" ]
 
 [params]
 
