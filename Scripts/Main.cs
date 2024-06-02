@@ -43,12 +43,12 @@ namespace Com.IsartDigital.ProjectName.Game {
             base._PhysicsProcess(delta);
             if (ResourceManager.settlerSaved + ResourceManager.settlerDead >= 40) victory();
 
-            Vortex.GetInstance().QueueFree();
+            
         }
 
         private void victory()
         {
-
+            Vortex.GetInstance().QueueFree();
         }
 
         protected override void Dispose(bool pDisposing)
