@@ -167,7 +167,7 @@ namespace Com.IsartDigital.ProjectName.Game
             iron += ironGain;
             UseAcction();
 
-            Ui_Manager.GetInstance().acctualizeTheHud();
+            Ui_Manager.GetInstance().UpdateHud();
         }
 
         public void ColectFood()
@@ -175,7 +175,7 @@ namespace Com.IsartDigital.ProjectName.Game
             food += FoodGain;
             UseAcction();
 
-            Ui_Manager.GetInstance().acctualizeTheHud();
+            Ui_Manager.GetInstance().UpdateHud();
         }
 
         public void CraftAtile()

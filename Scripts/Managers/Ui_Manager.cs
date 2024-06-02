@@ -7,10 +7,10 @@ namespace Com.IsartDigital.ProjectName.Game
     public class Ui_Manager : CanvasLayer
     {
         static private Ui_Manager instance;
-
         [Export] NodePath PlayButtonPath;
         [Export] NodePath SetingButtonPath;
         [Export] NodePath QuitButtonPath;
+        [Export] NodePath HelpButtonPath;
 
         [Export] NodePath IronCountLabelPath;
         [Export] NodePath FoodCountLabelPath;
@@ -31,6 +31,11 @@ namespace Com.IsartDigital.ProjectName.Game
         Label BlackHoleTurnLabel;
 
         Label AcctionLabel;
+
+        [Export] PackedScene sceneHelpBox;
+        HelpOutside helpBox;
+
+        Button HelpButton;
 
         static public Ui_Manager GetInstance () {
 			if (instance == null) instance = new Ui_Manager();
@@ -59,29 +64,47 @@ namespace Com.IsartDigital.ProjectName.Game
             BlackHoleTurnLabel = GetNode<Label>(BlackHoleTurnLabelPath);
             AcctionLabel = GetNode<Label>(AcctionLabelPath);
 
-            PlayButton.Connect("pressed", this, nameof(onPlayPressed));
-            SetingButton.Connect("pressed", this, nameof(onSettingPressed));
-            QuitButton.Connect("pressed", this, nameof(onQuitPressed));
+            //PlayButton.Connect("pressed", this, nameof(onPlayPressed));
+            //SetingButton.Connect("pressed", this, nameof(onSettingPressed));
+            //QuitButton.Connect("pressed", this, nameof(onQuitPressed));
 
-            acctualizeTheHud();
+            UpdateHud();
+
+            HelpButton = GetNode<Button>(HelpButtonPath);
+            HelpButton.Connect("pressed", this, nameof(OnHelpPressed));
         }
 
-        private void onPlayPressed()
+        public void MainMenu()
+        {
+
+        }
+
+        private void OnPlayPressed()
         {
             GD.Print("play");
         }
 
-        private void onSettingPressed()
+        private void OnSettingPressed()
         {
             GD.Print("Setting");
         }
 
-        private void onQuitPressed()
+        private void OnQuitPressed()
         {
             GetTree().Quit();
         }
 
-        public void acctualizeTheHud()
+        private void OnHelpPressed()
+        {
+            if (helpBox == null)
+            {
+                helpBox = sceneHelpBox.Instance<HelpOutside>();
+                AddChild(helpBox);
+            }
+            helpBox.Visible = true;
+        }
+
+        public void UpdateHud()
         {
             IronCountLabel.Text = ResourceManager.GetInstance().iron.ToString();
             FoodCountLabel.Text = ResourceManager.GetInstance().food.ToString();
