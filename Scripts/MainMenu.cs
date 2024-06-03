@@ -48,6 +48,8 @@ namespace Com.IsartDigital.ProjectName {
         private Tween animation = new Tween();
         private Tween blackHoleAnimation = new Tween();
 
+        // SETTINGS
+        [Export] private PackedScene settingsFactory;
 
         static public MainMenu GetInstance()
         {
@@ -80,7 +82,8 @@ namespace Com.IsartDigital.ProjectName {
 
         private void SettingPressed()
         {
-
+            Control lSettings = (Control)settingsFactory.Instance();
+            AddChild(lSettings);
         }
 
         private void QuitPressed()

@@ -169,6 +169,8 @@ namespace Com.IsartDigital.ProjectName.Game
             GD.Print("IronLeft = " + iron);
             GD.Print("FoodLeft = " + food);
 
+            SoundManager.GetInstance().Play(SoundManager.SoundType.PLACE_TILE);
+
             Ui_Manager.GetInstance().UpdateHud();
         }
 
@@ -178,6 +180,7 @@ namespace Com.IsartDigital.ProjectName.Game
             UseAcction();
 
             Ui_Manager.GetInstance().UpdateHud();
+            SoundManager.GetInstance().Play(SoundManager.SoundType.PLACE_TILE);
         }
 
         public void ColectFood()
@@ -186,6 +189,7 @@ namespace Com.IsartDigital.ProjectName.Game
             UseAcction();
 
             Ui_Manager.GetInstance().UpdateHud();
+            SoundManager.GetInstance().Play(SoundManager.SoundType.WATER);
         }
 
         public void CraftAtile()

@@ -1,6 +1,7 @@
 using Com.IsartDigital.ProjectName;
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 // Author : Dylan Lupon
 // Date : 06 / 02 / 2024
@@ -23,7 +24,7 @@ public class SoundManager : Node2D
     {
         Master = 0,
         Music = 1,
-        SoundEffect = 2
+        SoundEffects = 2
     }
 
     // TYPES
@@ -49,7 +50,9 @@ public class SoundManager : Node2D
     // SOUNDS EFFECTS
     [Export] private int soundPlayerCount = 10;
     [Export] private List<AudioStream> allSounds;
+    [Export] private float waitTimeBeforeNewSound = .5f;
     private List<AudioStreamPlayer> soundPlayers = new List<AudioStreamPlayer>();
+    private Dictionary<SoundType, Timer> soundTimers = new Dictionary<SoundType, Timer>();
     private int currentSoundPlayerIndex = 0;
 
     // MUSICS
@@ -85,7 +88,7 @@ public class SoundManager : Node2D
         // Create Sound Effect Players
         for (int lCurrentSoundPlayerIndex = 0; lCurrentSoundPlayerIndex < soundPlayerCount; lCurrentSoundPlayerIndex++)
             // Init
-            lCurrentPlayer = CreatePlayer(soundPlayers, Bus.SoundEffect);
+            lCurrentPlayer = CreatePlayer(soundPlayers, Bus.SoundEffects);
 
         // Create Musics Players
         for (int lCurrentMusicPlayerIndex = 0; lCurrentMusicPlayerIndex < musicPlayerCount; lCurrentMusicPlayerIndex++)
@@ -132,6 +135,19 @@ public class SoundManager : Node2D
     /// <param name="pType">Sound effct to play.</param>
     public void Play(SoundType pType)
     {
+        if (!soundTimers.Keys.Contains(pType))
+        {
+            soundTimers.Add(pType, new Timer());
+            AddChild(soundTimers[pType]);
+            soundTimers[pType].WaitTime = waitTimeBeforeNewSound;
+            soundTimers[pType].OneShot = true;
+            soundTimers[pType].Autostart = false;
+            soundTimers[pType].Stop();
+        }
+
+        if (!soundTimers[pType].IsStopped()) return;
+        soundTimers[pType].Start();
+
         Play(allSounds[(int)pType], false, soundPlayers[currentSoundPlayerIndex]);
         currentSoundPlayerIndex = (int)(++currentSoundPlayerIndex % soundPlayers.Count);
     }
@@ -150,7 +166,6 @@ public class SoundManager : Node2D
         AudioStreamPlayer lOldPlayer = musicPlayers[currentMusicPlayerIndex];
         currentMusicPlayerIndex = (int)(++currentMusicPlayerIndex % musicPlayers.Count);
         // Get The Music
-
         AudioStreamPlayer lNewPlayer = Play(allMusics[(int)pType], true, musicPlayers[currentMusicPlayerIndex]);
         // Play Transition
         transitionTween.InterpolateProperty(lOldPlayer, PROPERTY_VOLUME_DB, lOldPlayer.VolumeDb, VOLUME_DB_MIN, pTransitionDuration);
